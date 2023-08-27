@@ -1,0 +1,103 @@
+[
+    {
+      "username": "john_doe",
+      "email": "john.doe@example.com",
+      "firstName": "John",
+      "lastName": "Doe",
+      "avatar": "https://example.com/avatar/john_doe.png",
+      "role": "user",
+          "password": "password123"
+
+    },
+    {
+      "username": "jane_smith",
+      "email": "jane.smith@example.com",
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "avatar": "https://example.com/avatar/jane_smith.png",
+      "role": "admin",
+          "password": "password123"
+
+    },
+    {
+      "username": "michael_j",
+      "email": "michael.j@example.com",
+      "firstName": "Michael",
+      "lastName": "Johnson",
+      "avatar": "https://example.com/avatar/michael_j.png",
+      "role": "user",
+          "password": "password123"
+
+    },
+    {
+      "username": "sarah_t",
+      "email": "sarah.t@example.com",
+      "firstName": "Sarah",
+      "lastName": "Taylor",
+      "avatar": "https://example.com/avatar/sarah_t.png",
+      "role": "user",
+          "password": "password123"
+
+    },
+    {
+      "username": "james_b",
+      "email": "james.b@example.com",
+      "firstName": "James",
+      "lastName": "Brown",
+      "avatar": "https://example.com/avatar/james_b.png",
+      "role": "user",
+          "password": "password123"
+
+    },
+    {
+      "username": "linda_m",
+      "email": "linda.m@example.com",
+      "firstName": "Linda",
+      "lastName": "Miller",
+      "avatar": "https://example.com/avatar/linda_m.png",
+      "role": "admin",
+          "password": "password123"
+
+    },
+    {
+      "username": "robert_w",
+      "email": "robert.w@example.com",
+      "firstName": "Robert",
+      "lastName": "Wilson",
+      "avatar": "https://example.com/avatar/robert_w.png",
+      "role": "user",
+          "password": "password123"
+
+    },
+    {
+      "username": "mary_c",
+      "email": "mary.c@example.com",
+      "firstName": "Mary",
+      "lastName": "Clark",
+      "avatar": "https://example.com/avatar/mary_c.png",
+      "role": "user",
+          "password": "password123"
+
+    },
+    {
+      "username": "william_j",
+      "email": "william.j@example.com",
+      "firstName": "William",
+      "lastName": "Jackson",
+      "avatar": "https://example.com/avatar/william_j.png",
+      "role": "user",
+      "password": "password123"
+
+    },
+    {
+      "username": "jennifer_l",
+      "email": "jennifer.l@example.com",
+      "firstName": "Jennifer",
+      "lastName": "Lewis",
+      "avatar": "https://example.com/avatar/jennifer_l.png",
+      "role": "admin",
+          "password": "password123"
+
+    }
+  ]
+  
