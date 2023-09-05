@@ -1,4 +1,4 @@
-const { CategoryModel } = require('../models/categoryModel');
+const { KitModel } = require('../models/kitModel');
 const cache = new Map(); // A simple in-memory cache
 
 // Main function to get page data from the database
@@ -8,7 +8,7 @@ const getPageDataFromDb = async (pageName) => {
   if (cachedData) return cachedData;
   // If not in cache, query the database
   try {
-    const query = CategoryModel.findOne({ name: new RegExp(`^${pageName}$`, 'i') });
+    const query = KitModel.findOne({ name: new RegExp(`^${pageName}$`, 'i') });
     const data = await query;
     // Store the result in the cache, with an expiration time
     cache.set(pageName, data);

@@ -24,12 +24,12 @@ const getHtmlFilePath = async (fileName, dbData) => {
   if (fs.existsSync(htmlFilePath)) {
     return htmlFilePath;
   }
-  // Next, check if the fileName matches a key in the database data
+  // If not, check if the fileName matches a key in the database data
   if (dbData && dbNameNormalized === fileNameNormalized) {
     return path.join(__dirname, '../../Frontend/dist/index.html');
   }
   // Finally, check the static JSON data file
-  const jsonFilePath = path.join(__dirname, '../data/categoryData.json');
+  const jsonFilePath = path.join(__dirname, '../data/kits.json');
   const jsonData = readAndParseJsonFile(jsonFilePath);
   if (jsonData[fileNameNormalized]) {
     return path.join(__dirname, '../../Frontend/dist/index.html');

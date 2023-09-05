@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { CategoryModel } = require('../models/categoryModel');
+const { KitModel } = require('../models/kitModel');
 const { UserModel } = require('../models/userModel');
 const connectToDb = require('../db/mongoose');
 const fs = require('fs');
@@ -15,19 +15,12 @@ async function exportDocument(model, filePath) {
   console.log(`Exported ${data.length} documents to ${filePath}`);
 }
 
-async function exportData(model, filePath) {
-  try {
-    await exportDocument(model, filePath);
-  } catch (err) {
-    console.error(`Error exporting data to ${filePath}:`, err);
-  }
-}
-
 async function main() {
   try {
     await connectToDb();
-    await exportData(CategoryModel, path.join(__dirname, '../data/categories-export.json'));
-    await exportData(UserModel, path.join(__dirname, '../data/users-export.json'));
+
+    await exportDocument(KitModel, path.join(__dirname, '../data/categories-export.json'));
+    await exportDocument(UserModel, path.join(__dirname, '../data/users-export.json'));
   } catch (err) {
     console.error('Error:', err);
   } finally {

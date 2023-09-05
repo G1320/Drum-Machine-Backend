@@ -3,7 +3,7 @@
     "name": "Soccer",
     "subscribers": 800000,
     "description": "The football subreddit. News, results and discussion about the beautiful game.",
-    "posts": [
+    "sounds": [
       {
         "title": "Marten de Roon to make pizza for more than 1,000 people in Bergamo if Atalanta win the Champions league.",
         "author": "joeextreme"
@@ -22,7 +22,7 @@
     "name": "Chickens",
     "subscribers": 23956,
     "description": "A place to post your photos, video and questions about chickens!",
-    "posts": [
+    "sounds": [
       {
         "title": "Naughty chicken hid under a shed for 3 weeks and came home with 14 chicks today!",
         "author": "joeextreme",
@@ -43,7 +43,7 @@
     "name": "Mighty Harvest",
     "subscribers": 44002,
     "description": "Feeding many villages and village idiots for 10s of days.",
-    "posts": [
+    "sounds": [
       {
         "title": "My first meyer lemon ripened today. Im so proud of the little guy. Banana for scale",
         "author": "proudmamma",
@@ -60,24 +60,24 @@
     "name": "Tennis",
     "subscribers": 100000,
     "description": "The Tennis subreddit. News, results and discussion about the beautiful game.",
-    "posts": []
+    "sounds": []
   },
   {
     "name": "DJ",
     "subscribers": 1000000000,
     "description": "The DJ subreddit. News, results and discussion about the beautiful game.",
-    "posts": []
+    "sounds": []
   },
   {
     "name": "Musician",
     "subscribers": 1000000000,
     "description": "The Musician subreddit. News, results and discussion about the beautiful game.",
-    "posts": []
+    "sounds": []
   },
   {
     "name": "Gamer",
     "subscribers": 1000000000,
     "description": "The gamer subreddit. News, results and discussion about the beautiful game.",
-    "posts": []
+    "sounds": []
   }
 ]

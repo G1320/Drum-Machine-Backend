@@ -1,18 +1,18 @@
 const mongoose = require('mongoose');
 
-const postSchema = new mongoose.Schema({
+const soundSchema = new mongoose.Schema({
   title: { type: String, required: true },
   author: { type: String, required: true },
   img: { type: String, required: false },
 });
 
-const categorySchema = new mongoose.Schema({
+const kitSchema = new mongoose.Schema({
   name: { type: String, required: true },
   subscribers: { type: Number, required: true },
   description: { type: String, required: true },
-  posts: [postSchema],
+  sounds: [soundSchema],
 });
 
-const CategoryModel = mongoose.model('Category', categorySchema);
+const KitModel = mongoose.model('Kit', kitSchema);
 
-module.exports = { CategoryModel };
+module.exports = { KitModel };

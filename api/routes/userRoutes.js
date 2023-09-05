@@ -3,8 +3,8 @@ const userHandler = require('../handlers/userHandler');
 
 const router = express.Router();
 
-router.post('/', userHandler.createUser);
 router.get('/', userHandler.getAllUsers);
+router.post('/', userHandler.createUser);
 router.put('/:id', userHandler.updateUser);
 router.delete('/:id', userHandler.deleteUser);
 

@@ -2,19 +2,24 @@ const express = require('express');
 const router = express.Router();
 const { getHtmlFilePath } = require('../../utils/fileUtils');
 const { getPageDataFromDb } = require('../../services/dbService');
+const handleRequest = require('../../utils/requestHandler');
+const { validatePageName } = require('../../middleware/middleware'); // Update the path accordingly
 
 // Page routing based on pageName
-router.get('/pages/:pageName', async (req, res) => {
-  const { pageName } = req.params;
-  console.log(`Fetching data for pageName: ${pageName}`);
-  const dbData = await getPageDataFromDb(pageName);
-  const filePath = await getHtmlFilePath(pageName, dbData);
-  res.sendFile(filePath);
-});
+//prettier-ignore
+router.get('/pages/:pageName', validatePageName, 
+  handleRequest(async (req, res) => {
+    const { pageName } = req.params;
+    console.log(`Fetching data for pageName: ${pageName}`);
+    const dbData = await getPageDataFromDb(pageName);
+    const filePath = await getHtmlFilePath(pageName, dbData);
+    res.sendFile(filePath);  })
+);
 
 // (API) Get page data by pageName
-router.get('/api/pageData/:pageName', async (req, res) => {
-  try {
+//prettier-ignore
+router.get('/api/pageData/:pageName', validatePageName, 
+  handleRequest(async (req, res) => {
     const { pageName } = req.params;
     const data = await getPageDataFromDb(pageName);
     if (data) {
@@ -22,10 +27,7 @@ router.get('/api/pageData/:pageName', async (req, res) => {
     } else {
       res.status(404).json({ message: 'Page not found' });
     }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'An error occurred while fetching page data' });
-  }
-});
+  })
+);
 
 module.exports = router;
