@@ -3,7 +3,7 @@ const router = express.Router();
 const { getHtmlFilePath } = require('../../utils/fileUtils');
 const { getPageDataFromDb } = require('../../services/dbService');
 const handleRequest = require('../../utils/requestHandler');
-const { validatePageName } = require('../../middleware/middleware'); // Update the path accordingly
+const { validatePageName } = require('../../middleware/middleware');
 
 // Page routing based on pageName
 //prettier-ignore
