@@ -8,7 +8,7 @@ const createKit = handleRequest(async (req) => {
   return kit;
 });
 
-const getAllCategories = handleRequest(async () => {
+const getAllKits = handleRequest(async () => {
   return await KitModel.find();
 });
 
@@ -43,7 +43,7 @@ const deleteKitByName = handleRequest(async (req) => {
 
 module.exports = {
   createKit,
-  getAllCategories,
+  getAllKits,
   getKitByName,
   updateKitByName,
   deleteKitByName,

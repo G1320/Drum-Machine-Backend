@@ -1,28 +1,79 @@
-const morgan = require('morgan');
+const Morgan = require('morgan');
 const Joi = require('joi');
+const ExpressError = require('../utils/expressError');
 
 const validatePageName = (req, res, next) => {
   const schema = Joi.object({
-    pageName: Joi.string().alphanum().min(2).max(30).required(),
+    pageName: Joi.string().alphanum().min(2).max(30).required().label('The requested page name'),
   });
-
   const { error } = schema.validate(req.params);
   if (error) {
-    return res.status(400).send(error.details[0].message);
+    const msg = error.details
+      .map((el) => el.message)
+      .join(',')
+      .replace(/"/g, '');
+    throw new ExpressError(msg, 400);
+  } else {
+    next();
+  }
+};
+
+const validateUser = (req, res, next) => {
+  const schema = Joi.object({
+    username: Joi.string().required().label('Username'),
+    email: Joi.string().email().required().label('Email'),
+    firstName: Joi.string().required().label('First Name'),
+    lastName: Joi.string().required().label('Last Name'),
+    avatar: Joi.string().label('Avatar'), //Add .url when ready
+    password: Joi.string().min(6).required().label('Password'),
+    // .external(async (value) => {}),
+    role: Joi.string().valid('user', 'admin').default('user').label('Role'),
+    createdAt: Joi.date().default(Date.now).label('Creation Date'),
+    updatedAt: Joi.date().default(Date.now).label('Last Update'),
+  });
+
+  const { error } = schema.validate(req.body);
+  if (error) {
+    const msg = error.details
+      .map((el) => el.message)
+      .join(',')
+      .replace(/"/g, '');
+    throw new ExpressError(msg, 400);
   }
 
   next();
 };
 
+const validateKit = (req, res, next) => {
+  const soundSchema = Joi.object({});
+
+  const schema = Joi.object({
+    name: Joi.string().required().label('Kit name'),
+    subscribers: Joi.number().required().label('Number of subscribers'),
+    description: Joi.string().required().label('Kit description'),
+    sounds: Joi.array().items(soundSchema).label('Sounds array'),
+  });
+
+  const { error } = schema.validate(req.body);
+  if (error) {
+    const msg = error.details
+      .map((el) => el.message)
+      .join(',')
+      .replace(/"/g, '');
+    throw new ExpressError(msg, 400);
+  }
+  next();
+};
+
 const handleDbErrorMw = (err, req, res, next) => {
   if (['CastError', 'ValidationError', 'DisconnectedError', 'MongoError'].includes(err.name)) {
-    err.message = handleDbError(err);
+    err = new ExpressError(handleDbErrorMsg(err), 400);
   }
   console.error(err.stack);
   next(err);
 };
 
-const handleDbError = (error) => {
+const handleDbErrorMsg = (error) => {
   switch (error.name) {
     case 'CastError':
       console.error('Invalid ID format:', error);
@@ -44,14 +95,17 @@ const handleDbError = (error) => {
 
 const handleErrorMw = (err, req, res, next) => {
   const { statusCode, message } = err;
-  err.status(statusCode || 500).send(message || 'Something went wrong!');
+  console.error(message);
+  res.status(statusCode || 500).send(message || 'Something went wrong!');
 };
 
-const logRequestsMw = morgan('tiny');
+const logRequestsMw = Morgan('tiny');
 
 module.exports = {
   handleDbErrorMw,
   logRequestsMw,
   handleErrorMw,
   validatePageName,
+  validateKit,
+  validateUser,
 };
