@@ -1,6 +1,7 @@
 const Morgan = require('morgan');
 const Joi = require('joi');
 const ExpressError = require('../utils/expressError');
+const handleJoiError = require('../utils/joiErrorHandler');
 
 const validatePageName = (req, res, next) => {
   const schema = Joi.object({
@@ -8,11 +9,7 @@ const validatePageName = (req, res, next) => {
   });
   const { error } = schema.validate(req.params);
   if (error) {
-    const msg = error.details
-      .map((el) => el.message)
-      .join(',')
-      .replace(/"/g, '');
-    throw new ExpressError(msg, 400);
+    handleJoiError(error);
   } else {
     next();
   }
@@ -34,11 +31,7 @@ const validateUser = (req, res, next) => {
 
   const { error } = schema.validate(req.body);
   if (error) {
-    const msg = error.details
-      .map((el) => el.message)
-      .join(',')
-      .replace(/"/g, '');
-    throw new ExpressError(msg, 400);
+    handleJoiError(error);
   }
 
   next();
@@ -56,11 +49,7 @@ const validateKit = (req, res, next) => {
 
   const { error } = schema.validate(req.body);
   if (error) {
-    const msg = error.details
-      .map((el) => el.message)
-      .join(',')
-      .replace(/"/g, '');
-    throw new ExpressError(msg, 400);
+    handleJoiError(error);
   }
   next();
 };
