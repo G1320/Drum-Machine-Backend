@@ -8,8 +8,7 @@ const getPageDataFromDb = async (pageName) => {
   if (cachedData) return cachedData;
   // If not in cache, query the database
   try {
-    const query = KitModel.findOne({ name: new RegExp(`^${pageName}$`, 'i') });
-    const data = await query;
+    const data = await KitModel.findOne({ name: new RegExp(`^${pageName}$`, 'i') });
     // Store the result in the cache, with an expiration time
     cache.set(pageName, data);
     setTimeout(() => cache.delete(pageName), 1000 * 60 * 5);

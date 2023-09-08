@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const soundSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  author: { type: String, required: true },
+  title: { type: String, required: false },
+  author: { type: String, required: false },
   img: { type: String, required: false },
 });
 

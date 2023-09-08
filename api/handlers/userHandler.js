@@ -1,5 +1,6 @@
 const { UserModel } = require('../../models/userModel');
-const handleRequest = require('../../utils/requestHandler'); // Adjust the path to point to the shared file
+const handleRequest = require('../../utils/requestHandler');
+const ExpressError = require('../../utils/expressError');
 
 const createUser = handleRequest(async (req) => {
   const user = new UserModel(req.body);
@@ -24,7 +25,7 @@ const deleteUser = handleRequest(async (req) => {
   if (!user) {
     throw new ExpressError('User not found', 404);
   }
-  // Use the "null" return to signify a 204 No Content response
+  // Using the "null" return to signify a 204 No Content response
   return null;
 });
 

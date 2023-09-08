@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/', kitHandler.getAllKits);
 router.get('/:kitName', validateKit, kitHandler.getKitByName);
-router.post('/', validateKit, kitHandler.createKit);
+router.post('/', kitHandler.createKit);
 router.put('/:kitName', validateKit, kitHandler.updateKitByName);
 router.delete('/:kitName', kitHandler.deleteKitByName);
 
