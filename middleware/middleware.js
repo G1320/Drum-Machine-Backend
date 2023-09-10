@@ -40,15 +40,19 @@ const validateUser = (req, res, next) => {
 
 const validateKit = (req, res, next) => {
   const soundSchema = Joi.object({
+    _id: Joi.string().optional(),
     title: Joi.string().optional().label('Sound Title'),
     author: Joi.string().optional().label('Sound Author'),
     img: Joi.string().optional().label('Sound Image URL'),
   });
+
   const schema = Joi.object({
-    name: Joi.string().required().label('Kit name'),
+    _id: Joi.string().optional(),
+    name: Joi.string().alphanum().min(2).max(30).required().label('Kit name'),
     subscribers: Joi.number().optional().label('Number of subscribers'),
     description: Joi.string().required().label('Kit description'),
     sounds: Joi.array().items(soundSchema).optional().label('Sounds array'),
+    __v: Joi.number().optional(),
   });
 
   const { error } = schema.validate(req.body);

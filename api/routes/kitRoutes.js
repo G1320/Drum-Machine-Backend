@@ -5,9 +5,9 @@ const { validateKit } = require('../../middleware/middleware');
 const router = express.Router();
 
 router.get('/', kitHandler.getAllKits);
-router.get('/:kitName', validateKit, kitHandler.getKitByName);
+router.get('/:kitId', validateKit, kitHandler.getKitById);
 router.post('/', kitHandler.createKit);
-router.put('/:kitName', validateKit, kitHandler.updateKitByName);
-router.delete('/:kitName', kitHandler.deleteKitByName);
+router.put('/:kitId', validateKit, kitHandler.updateKitById);
+router.delete('/:kitId', kitHandler.deleteKitById);
 
 module.exports = router;

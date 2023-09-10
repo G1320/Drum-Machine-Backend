@@ -12,18 +12,18 @@ const getAllKits = handleRequest(async () => {
   return await KitModel.find();
 });
 
-const getKitByName = handleRequest(async (req) => {
-  const { kitName } = req.params;
-  const kit = await KitModel.findOne({ name: kitName });
+const getKitById = handleRequest(async (req) => {
+  const { kitId } = req.params;
+  const kit = await KitModel.findById(kitId);
   if (!kit) {
     throw new ExpressError('Kit not found', 404);
   }
   return kit;
 });
 
-const updateKitByName = handleRequest(async (req) => {
-  const { kitName } = req.params;
-  const kit = await KitModel.findOneAndUpdate({ name: kitName }, req.body, {
+const updateKitById = handleRequest(async (req) => {
+  const { kitId } = req.params;
+  const kit = await KitModel.findByIdAndUpdate(kitId, req.body, {
     new: true,
   });
   if (!kit) {
@@ -32,9 +32,9 @@ const updateKitByName = handleRequest(async (req) => {
   return kit;
 });
 
-const deleteKitByName = handleRequest(async (req) => {
-  const { kitName } = req.params;
-  const kit = await KitModel.findOneAndDelete({ name: kitName });
+const deleteKitById = handleRequest(async (req) => {
+  const { kitId } = req.params;
+  const kit = await KitModel.findByIdAndDelete(kitId);
   if (!kit) {
     throw new ExpressError('Kit not found', 404);
   }
@@ -44,7 +44,7 @@ const deleteKitByName = handleRequest(async (req) => {
 module.exports = {
   createKit,
   getAllKits,
-  getKitByName,
-  updateKitByName,
-  deleteKitByName,
+  getKitById,
+  updateKitById,
+  deleteKitById,
 };

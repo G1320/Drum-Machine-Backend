@@ -4,6 +4,7 @@ const soundSchema = new mongoose.Schema({
   title: { type: String, required: false },
   author: { type: String, required: false },
   img: { type: String, required: false },
+  _id: { type: String, required: false },
 });
 
 const kitSchema = new mongoose.Schema({
