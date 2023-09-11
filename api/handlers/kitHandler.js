@@ -9,8 +9,21 @@ const createKit = handleRequest(async (req) => {
   return kit;
 });
 
-const getAllKits = handleRequest(async () => {
-  return await KitModel.find();
+const getAllKits = handleRequest(async (req) => {
+  let query = KitModel.find();
+  if (req.query.name) {
+    query = query.where('name', new RegExp(req.query.name, 'i'));
+  }
+  if (req.query.someOtherField) {
+    query = query.where('someOtherField', req.query.someOtherField);
+  }
+  if (req.query.sortBy) {
+    const order = req.query.order || 'asc';
+    query = query.sort({ [req.query.sortBy]: order === 'asc' ? 1 : -1 });
+  }
+  const kits = await query.exec();
+
+  return kits;
 });
 
 const getKitById = handleRequest(async (req) => {
@@ -29,31 +42,23 @@ const updateKitById = handleRequest(async (req) => {
   if (!existingKit) {
     throw new ExpressError('Kit not found', 404);
   }
-
-  // Update the kit
   const kit = await KitModel.findByIdAndUpdate(kitId, req.body, {
     new: true,
   });
-
   // Invalidate the cache for the kit using its name
   invalidateKitCache(existingKit.name);
-
   // Update the cache with the new data
   await getPageDataFromDb(existingKit.name, true);
-
   return kit;
 });
 
 const deleteKitById = handleRequest(async (req) => {
   const { kitId } = req.params;
-  // Find the kit to get its name for cache invalidation
   const existingKit = await KitModel.findById(kitId);
   if (!existingKit) {
     throw new ExpressError('Kit not found', 404);
   }
-  // Delete the kit
   await KitModel.findByIdAndDelete(kitId);
-  // Invalidate the cache for the kit using its name
   invalidateKitCache(existingKit.name);
   return null;
 });
