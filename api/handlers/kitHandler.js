@@ -1,6 +1,7 @@
 const { KitModel } = require('../../models/kitModel');
 const ExpressError = require('../../utils/expressError');
 const handleRequest = require('../../utils/requestHandler');
+const { invalidateKitCache, getPageDataFromDb } = require('../../services/dbService');
 
 const createKit = handleRequest(async (req) => {
   const kit = new KitModel(req.body);
@@ -23,21 +24,37 @@ const getKitById = handleRequest(async (req) => {
 
 const updateKitById = handleRequest(async (req) => {
   const { kitId } = req.params;
+  // Find the kit to get its name for cache invalidation
+  const existingKit = await KitModel.findById(kitId);
+  if (!existingKit) {
+    throw new ExpressError('Kit not found', 404);
+  }
+
+  // Update the kit
   const kit = await KitModel.findByIdAndUpdate(kitId, req.body, {
     new: true,
   });
-  if (!kit) {
-    throw new ExpressError('Kit not found', 404);
-  }
+
+  // Invalidate the cache for the kit using its name
+  invalidateKitCache(existingKit.name);
+
+  // Update the cache with the new data
+  await getPageDataFromDb(existingKit.name, true);
+
   return kit;
 });
 
 const deleteKitById = handleRequest(async (req) => {
   const { kitId } = req.params;
-  const kit = await KitModel.findByIdAndDelete(kitId);
-  if (!kit) {
+  // Find the kit to get its name for cache invalidation
+  const existingKit = await KitModel.findById(kitId);
+  if (!existingKit) {
     throw new ExpressError('Kit not found', 404);
   }
+  // Delete the kit
+  await KitModel.findByIdAndDelete(kitId);
+  // Invalidate the cache for the kit using its name
+  invalidateKitCache(existingKit.name);
   return null;
 });
 
