@@ -8,6 +8,7 @@ const kitRoutes = require('./api/routes/kitRoutes');
 const userRoutes = require('./api/routes/userRoutes');
 const searchRoutes = require('./api/routes/searchRoutes');
 const pageRoutes = require('./api/routes/pageRoutes');
+const authRoutes = require('./api/routes/authRoutes');
 
 connectToDb();
 
@@ -24,8 +25,10 @@ app.use('/views', express.static(path.join(__dirname, './views')));
 
 app.use('/api/users', userRoutes);
 app.use('/api/kits', kitRoutes);
+app.use('/api/auth', authRoutes);
 app.use(searchRoutes);
 app.use(pageRoutes);
+
 app.use(logRequestsMw);
 app.use(handleDbErrorMw);
 app.use(handleErrorMw);

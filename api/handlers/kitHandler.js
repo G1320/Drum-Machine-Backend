@@ -21,6 +21,7 @@ const getAllKits = handleRequest(async (req) => {
     const order = req.query.order || 'asc';
     query = query.sort({ [req.query.sortBy]: order === 'asc' ? 1 : -1 });
   }
+  query.collation({ locale: 'en', strength: 2 });
   const kits = await query.exec();
 
   return kits;
@@ -48,7 +49,7 @@ const updateKitById = handleRequest(async (req) => {
   // Invalidate the cache for the kit using its name
   invalidateKitCache(existingKit.name);
   // Update the cache with the new data
-  await getPageDataFromDb(existingKit.name, true);
+  await getPageDataFromDb(existingKit.name, (forceUpdate = true));
   return kit;
 });
 
@@ -70,3 +71,22 @@ module.exports = {
   updateKitById,
   deleteKitById,
 };
+
+// const updateKitById = handleRequest(async (req) => {
+//   const { kitId } = req.params.kitId;
+//   console.log('kitId in updateKitById : ', kitId);
+//   // Find the kit to verify its existence before proceeding with the update
+//   const existingKit = await KitModel.findById(kitId);
+//   if (!existingKit) {
+//     throw new ExpressError('Kit not found', 404);
+//   }
+//   // Proceed with updating the kit in the database using the kitId and the request body
+//   const kit = await KitModel.findByIdAndUpdate(kitId, req.body, {
+//     new: true,
+//   });
+//   // Invalidate the cache for the kit using its kitId
+//   invalidateKitCache(kitId);
+//   // Update the cache with the new data, forcing an update to fetch the latest data from the database
+//   await getPageDataFromDb(kitId, true);
+//   return kit;
+// });

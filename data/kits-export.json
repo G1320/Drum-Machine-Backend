@@ -1,0 +1,214 @@
+[
+  {
+    "_id": "64e61e8b7aecdc67f8632329",
+    "name": "Soccer",
+    "subscribers": 800000,
+    "description": "The football subreddit. News, results and discussion about the beautiful game.",
+    "posts": [
+      {
+        "title": "Marten de Roon to make pizza for more than 1,000 people in Bergamo if Atalanta win the Champions league.",
+        "author": "joeextreme",
+        "_id": "64e61e8b7aecdc67f863232a"
+      },
+      {
+        "title": "Stephan Lichtsteiner has retired from professional football",
+        "author": "odd person",
+        "_id": "64e61e8b7aecdc67f863232b"
+      },
+      {
+        "title": "OFFICIAL: Dani Parejo signs for Villareal.",
+        "author": "joeextreme",
+        "_id": "64e61e8b7aecdc67f863232c"
+      }
+    ],
+    "__v": 0,
+    "sounds": []
+  },
+  {
+    "_id": "64e61e8b7aecdc67f8632331",
+    "name": "Rock",
+    "subscribers": 23956,
+    "description": "A place to post your photos, video and questions about Rock!",
+    "posts": [
+      {
+        "title": "Naughty chicken hid under a shed for 3 weeks and came home with 14 chicks today!",
+        "author": "joeextreme",
+        "img": "https://preview.redd.it/sja35au7whd51.jpg?width=640&crop=smart&auto=webp&s=c39f8a99896b55fafc5d0ed882040a963ca54409",
+        "_id": "64e61e8b7aecdc67f8632332"
+      },
+      {
+        "title": "Had to kill my first chicken today. Does it get any easier?",
+        "author": "sad boi",
+        "_id": "64e61e8b7aecdc67f8632333"
+      },
+      {
+        "title": "My five year old chicken set and hatched one baby. I guess she wanted to be a mama one more time.",
+        "author": "tammythetiger",
+        "img": "https://preview.redd.it/lervkuis3me51.jpg?width=640&crop=smart&auto=webp&s=6a18ab3c4daa80eccf3449217589b922fa443946",
+        "_id": "64e61e8b7aecdc67f8632334"
+      }
+    ],
+    "__v": 0,
+    "sounds": []
+  },
+  {
+    "_id": "64e61e8b7aecdc67f863233c",
+    "name": "Tennis",
+    "subscribers": 100000,
+    "description": "The Tennis subreddit. News, results and discussion about the beautiful game.",
+    "posts": [],
+    "__v": 0,
+    "sounds": []
+  },
+  {
+    "_id": "64e61e8b7aecdc67f863233f",
+    "name": "DJ",
+    "subscribers": 1000000000,
+    "description": "The DJ subreddit. News, results and discussion about the beautiful game.",
+    "posts": [],
+    "__v": 0,
+    "sounds": []
+  },
+  {
+    "_id": "64e61e8b7aecdc67f8632342",
+    "name": "Musician",
+    "subscribers": 1000000000,
+    "description": "The Musician subreddit. News, results and discussion about the beautiful game.",
+    "posts": [],
+    "__v": 0,
+    "sounds": []
+  },
+  {
+    "_id": "64e61e8b7aecdc67f8632345",
+    "name": "Gamer",
+    "subscribers": 1000000000,
+    "description": "The gamer subreddit. News, results and discussion about the beautiful game.",
+    "posts": [],
+    "__v": 0,
+    "sounds": []
+  },
+  {
+    "_id": "64f837915cb1bfa7ef1b0ef0",
+    "name": "dolls",
+    "subscribers": 1000000000,
+    "description": "The dolls subreddit. News, results and discussion about the beautiful game.",
+    "sounds": [],
+    "__v": 0
+  },
+  {
+    "_id": "64f9a0205fc8c39d8af5607d",
+    "name": "toast",
+    "subscribers": 22,
+    "description": "The toast subreddit. News, results and discussion about the beautiful game.",
+    "sounds": [],
+    "__v": 0
+  },
+  {
+    "_id": "64f9b1a98eacc46e610a118c",
+    "name": "Desert",
+    "subscribers": 22,
+    "description": "The Desert subreddit. News, results and discussion about the beautiful game.",
+    "sounds": [],
+    "__v": 0
+  },
+  {
+    "_id": "64faba26de2fd0bc2569195c",
+    "name": "Plugins",
+    "subscribers": 0,
+    "description": "The most unique ever!",
+    "sounds": [
+      {
+        "_id": "64faba26de2fd0bc2569195d"
+      }
+    ],
+    "__v": 0
+  },
+  {
+    "_id": "64fac2243a3967aad67e62f0",
+    "name": "Organic",
+    "subscribers": 0,
+    "description": "The most organic in the bizz!",
+    "sounds": [
+      {
+        "_id": "64fac2243a3967aad67e62f1"
+      }
+    ],
+    "__v": 0
+  },
+  {
+    "_id": "64fac7ad3a3967aad67e6303",
+    "name": "NinjaBeats",
+    "subscribers": 0,
+    "description": "The best eva!",
+    "sounds": [
+      {
+        "_id": "64fac7ad3a3967aad67e6304"
+      }
+    ],
+    "__v": 0
+  },
+  {
+    "_id": "64fadeda6faf14e2488dd3be",
+    "name": "Metallica",
+    "subscribers": 0,
+    "description": "Masters of puppets!",
+    "sounds": [
+      {
+        "_id": "64fadeda6faf14e2488dd3bf"
+      }
+    ],
+    "__v": 0
+  },
+  {
+    "_id": "64fb0ba26faf14e2488dd3cd",
+    "name": "Nature",
+    "subscribers": 0,
+    "description": "The most natural ever!",
+    "sounds": [
+      {
+        "_id": "64fb0ba26faf14e2488dd3ce"
+      }
+    ],
+    "__v": 0
+  },
+  {
+    "_id": "64fb13d8187c098f65aa2922",
+    "name": "Ella",
+    "subscribers": 0,
+    "description": "The best eva",
+    "sounds": [
+      {}
+    ],
+    "__v": 0
+  },
+  {
+    "_id": "64fb1835ae18494ac4ef73e3",
+    "name": "Moonshine",
+    "subscribers": 0,
+    "description": "The community for all",
+    "sounds": [
+      {}
+    ],
+    "__v": 0
+  },
+  {
+    "_id": "64fdad36a7684bc0c94ae5e0",
+    "name": "IDM",
+    "subscribers": 0,
+    "description": "The intelligent dance music!",
+    "sounds": [
+      {}
+    ],
+    "__v": 0
+  },
+  {
+    "_id": "64fed48dd1038a01d85ecc72",
+    "name": "MongoDb",
+    "subscribers": 0,
+    "description": "Kit description is required",
+    "sounds": [
+      {}
+    ],
+    "__v": 0
+  }
+]

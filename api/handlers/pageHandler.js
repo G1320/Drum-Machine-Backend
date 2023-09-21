@@ -1,15 +1,17 @@
+const path = require('path');
 const { getPageDataFromDb } = require('../../services/dbService');
-const { getHtmlFilePath } = require('../../utils/fileUtils');
 
-module.exports.getPage = async (req, res) => {
-  const { pageName } = req.params;
-  console.log(`Fetching data for pageName: ${pageName}`);
-  const dbData = await getPageDataFromDb(pageName);
-  const filePath = await getHtmlFilePath(pageName, dbData);
-  res.sendFile(filePath);
+module.exports.getPageDataById = async (req, res) => {
+  const { pageId } = req.params;
+  const data = await getPageDataFromDb(pageId);
+  if (data) {
+    res.json(data);
+  } else {
+    res.status(404).json({ message: 'Page not found' });
+  }
 };
 
-module.exports.getPageData = async (req, res) => {
+module.exports.getPageDataByName = async (req, res) => {
   const { pageName } = req.params;
   const data = await getPageDataFromDb(pageName);
   if (data) {
@@ -17,4 +19,8 @@ module.exports.getPageData = async (req, res) => {
   } else {
     res.status(404).json({ message: 'Page not found' });
   }
+};
+
+module.exports.serveFrontend = async (req, res) => {
+  res.sendFile(path.join(__dirname, '../../../Frontend/dist/index.html'));
 };

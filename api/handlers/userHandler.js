@@ -2,8 +2,6 @@ const { UserModel } = require('../../models/userModel');
 const handleRequest = require('../../utils/requestHandler');
 const ExpressError = require('../../utils/expressError');
 
-
-
 const createUser = handleRequest(async (req) => {
   const user = new UserModel(req.body);
   await user.save();

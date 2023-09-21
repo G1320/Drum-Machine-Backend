@@ -1,0 +1,121 @@
+[
+  {
+    "_id": "64e61e8b7aecdc67f863234b",
+    "username": "jane_smith",
+    "email": "jane.smith@example.com",
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "avatar": "https://example.com/avatar/jane_smith.png",
+    "role": "admin",
+    "createdAt": "2023-08-23T14:58:19.242Z",
+    "updatedAt": "2023-08-23T14:58:19.242Z",
+    "__v": 0
+  },
+  {
+    "_id": "64e61e8b7aecdc67f863234e",
+    "username": "michael_j",
+    "email": "michael.j@example.com",
+    "firstName": "Michael",
+    "lastName": "Johnson",
+    "avatar": "https://example.com/avatar/michael_j.png",
+    "role": "user",
+    "createdAt": "2023-08-23T14:58:19.311Z",
+    "updatedAt": "2023-08-23T14:58:19.311Z",
+    "__v": 0
+  },
+  {
+    "_id": "64e61e8b7aecdc67f8632351",
+    "username": "sarah_t",
+    "email": "sarah.t@example.com",
+    "firstName": "Sarah",
+    "lastName": "Taylor",
+    "avatar": "https://example.com/avatar/sarah_t.png",
+    "role": "user",
+    "createdAt": "2023-08-23T14:58:19.376Z",
+    "updatedAt": "2023-08-23T14:58:19.376Z",
+    "__v": 0
+  },
+  {
+    "_id": "64e61e8b7aecdc67f8632354",
+    "username": "james_b",
+    "email": "james.b@example.com",
+    "firstName": "James",
+    "lastName": "Brown",
+    "avatar": "https://example.com/avatar/james_b.png",
+    "role": "user",
+    "createdAt": "2023-08-23T14:58:19.443Z",
+    "updatedAt": "2023-08-23T14:58:19.443Z",
+    "__v": 0
+  },
+  {
+    "_id": "64e61e8b7aecdc67f8632357",
+    "username": "linda_mdsaas",
+    "email": "linda.m@example.com",
+    "firstName": "Linda",
+    "lastName": "Miller",
+    "avatar": "https://example.com/avatar/linda_m.png",
+    "role": "admin",
+    "createdAt": "2023-08-23T14:58:19.509Z",
+    "updatedAt": "2023-08-23T14:58:19.509Z",
+    "__v": 0
+  },
+  {
+    "_id": "64e61e8b7aecdc67f863235d",
+    "username": "mary_c",
+    "email": "mary.c@example.com",
+    "firstName": "Mary",
+    "lastName": "Clark",
+    "avatar": "https://example.com/avatar/mary_c.png",
+    "role": "user",
+    "createdAt": "2023-08-23T14:58:19.640Z",
+    "updatedAt": "2023-08-23T14:58:19.640Z",
+    "__v": 0
+  },
+  {
+    "_id": "64e61e8b7aecdc67f8632363",
+    "username": "jennifer_l",
+    "email": "jennifer.l@example.com",
+    "firstName": "Jennifer",
+    "lastName": "Lewis",
+    "avatar": "https://example.com/avatar/jennifer_l.png",
+    "role": "admin",
+    "createdAt": "2023-08-23T14:58:19.773Z",
+    "updatedAt": "2023-08-23T14:58:19.773Z",
+    "__v": 0
+  },
+  {
+    "_id": "64e70fe432141afda309f388",
+    "username": "This one testtttt",
+    "email": "Testie@Testy.com",
+    "firstName": "The ",
+    "lastName": "DB Test",
+    "role": "user",
+    "createdAt": "2023-08-24T08:08:04.152Z",
+    "updatedAt": "2023-08-24T08:08:04.153Z",
+    "__v": 0,
+    "avatar": "dasdasdsa"
+  },
+  {
+    "_id": "64e744adea79fc87e474c916",
+    "username": "adsdas",
+    "email": "sadsaas@moshe.com",
+    "firstName": "asddas",
+    "lastName": "asddsa",
+    "role": "user",
+    "createdAt": "2023-08-24T11:53:17.379Z",
+    "updatedAt": "2023-08-24T11:53:17.379Z",
+    "__v": 0,
+    "avatar": "moshe.com"
+  },
+  {
+    "_id": "64fd8649b1adbabbbf674b37",
+    "username": "Dudu",
+    "email": "Dudu@tassa.com",
+    "firstName": "Dude",
+    "lastName": "Dudu",
+    "role": "user",
+    "createdAt": "2023-09-10T09:03:05.457Z",
+    "updatedAt": "2023-09-10T09:03:05.458Z",
+    "__v": 0
+  }
+]
