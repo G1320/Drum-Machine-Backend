@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { validatePageName } = require('../../middleware/middleware');
+const { validatePageName } = require('../../middleware/mw');
 const { getPageDataByName, serveFrontend, getPageDataById } = require('../handlers/pageHandler');
 const handleRequest = require('../../utils/requestHandler');
 

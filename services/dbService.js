@@ -2,7 +2,7 @@ const { KitModel } = require('../models/kitModel');
 const mongoose = require('mongoose'); // Needed to use ObjectId.isValid
 const cache = new Map(); // A simple in-memory cache
 
-const getPageDataFromDb = async (identifier, forceUpdate = false) => {
+const getAndCachePageDataFromDb = async (identifier, forceUpdate = false) => {
   if (!forceUpdate) {
     // First check if the data is in the cache
     const cachedData = cache.get(identifier);
@@ -45,7 +45,7 @@ const updateKit = async (kitId, updatedData) => {
 };
 
 module.exports = {
-  getPageDataFromDb,
+  getAndCachePageDataFromDb,
   updateKit,
   invalidateKitCache,
 };

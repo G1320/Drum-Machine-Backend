@@ -25,7 +25,6 @@ const validateUser = (req, res, next) => {
     avatar: Joi.string().label('Avatar').optional(),
     password: Joi.string().min(6).required().label('Password'),
     terms: Joi.boolean().label('Terms Agreement').optional(),
-    // .external(async (value) => {}),
     role: Joi.string().valid('user', 'admin').default('user').label('Role'),
     createdAt: Joi.date().default(Date.now).label('Creation Date'),
     updatedAt: Joi.date().default(Date.now).label('Last Update'),
@@ -69,26 +68,6 @@ const handleDbErrorMw = (err, req, res, next) => {
   console.error(err.stack);
   next(err);
 };
-
-// const handleDbErrorMsg = (error) => {
-//   switch (error.name) {
-//     case 'CastError':
-//       console.error('Invalid ID format:', error);
-//       return `Invalid request data: ${error.message}`;
-//     case 'ValidationError':
-//       console.error('Validation Error:', error);
-//       return `Data validation failed: ${error.message}`;
-//     case 'DisconnectedError':
-//       console.error('Disconnected from database:', error);
-//       return `Database connection lost: ${error.message}`;
-//     case 'MongoError':
-//       console.error('MongoDB Error:', error);
-//       return `An error occurred with MongoDB: ${error.message}`;
-//     default:
-//       console.error('Unknown database error:', error);
-//       return `An unknown error occurred: ${error.message}`;
-//   }
-// };
 
 const handleErrorMw = (err, req, res, next) => {
   const { statusCode, message } = err;

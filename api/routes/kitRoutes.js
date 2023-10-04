@@ -1,23 +1,18 @@
 const express = require('express');
-const authHandler = require('../../middleware/authHandler');
+
 const kitHandler = require('../handlers/kitHandler');
-const { validateKit } = require('../../middleware/middleware');
+const { validateKit } = require('../../middleware/mw');
+const authMw = require('../../middleware/authMw');
 
 const router = express.Router();
 
-router.get('/my-kits', authHandler, async (req, res) => {
-  try {
-    const kits = await kitHandler.getAllKits(req); // You might need to update the handler function to filter kits based on user ID using req.user._id
-    res.send(kits);
-  } catch (error) {
-    res.status(500).send(error.message);
-  }
-});
-
+// authMw secures the endpoint to allow only authorized users to perform CRUD on kits
+router.get('/my-kits/:id', authMw, kitHandler.getUserKits);
 router.get('/', kitHandler.getAllKits);
 router.get('/:kitId', validateKit, kitHandler.getKitById);
-router.post('/', authHandler, kitHandler.createKit); // Securing the endpoint to allow authorized users to create kits
-router.put('/:kitId', authHandler, validateKit, kitHandler.updateKitById); // Securing the endpoint to allow only authorized users to update kits
-router.delete('/:kitId', authHandler, kitHandler.deleteKitById); // Securing the endpoint to allow only authorized users to delete kits
+router.get('/ids/:kitIds', kitHandler.getKitsByIds); // new route
+router.post('/', authMw, kitHandler.createKit);
+router.put('/:kitId', authMw, validateKit, kitHandler.updateKitById);
+router.delete('/:kitId', authMw, kitHandler.deleteKitById);
 
 module.exports = router;

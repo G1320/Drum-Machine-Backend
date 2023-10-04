@@ -8,29 +8,37 @@ const createUser = handleRequest(async (req) => {
   return user;
 });
 
+// const getUserById = handleRequest(async (req) => {
+//   const user = await UserModel.findById(req.params.id);
+//   console.log('user in getByID: ', user);
+//   if (!user) {
+//     throw new ExpressError('User not found', 404);
+//   }
+//   return user;
+// });
+
 const getAllUsers = handleRequest(async () => {
   return await UserModel.find({});
 });
 
 const updateUser = handleRequest(async (req) => {
   const user = await UserModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
-  if (!user) {
-    throw new ExpressError('User not found', 404);
-  }
+  if (!user) throw new ExpressError('User not found', 404);
+
   return user;
 });
 
 const deleteUser = handleRequest(async (req) => {
   const user = await UserModel.findByIdAndDelete(req.params.id);
-  if (!user) {
-    throw new ExpressError('User not found', 404);
-  }
+  if (!user) throw new ExpressError('User not found', 404);
+
   // Using the "null" return to signify a 204 No Content response
   return null;
 });
 
 module.exports = {
   createUser,
+  // getUserById,
   getAllUsers,
   updateUser,
   deleteUser,

@@ -2,7 +2,9 @@ const { port } = require('./config');
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-const { handleErrorMw, handleDbErrorMw, logRequestsMw } = require('./middleware/middleware');
+const cookieParser = require('cookie-parser');
+
+const { handleErrorMw, handleDbErrorMw, logRequestsMw } = require('./middleware/mw');
 const connectToDb = require('./db/mongoose');
 const kitRoutes = require('./api/routes/kitRoutes');
 const userRoutes = require('./api/routes/userRoutes');
@@ -14,6 +16,8 @@ connectToDb();
 
 const app = express();
 app.use(cors());
+app.use(cookieParser(process.env.JWT_SECRET_KEY));
+
 app.use((req, res, next) => {
   res.setHeader('Permissions-Policy', 'interest-cohort=()');
   next();

@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-const { UserModel } = require('../models/userModel'); // Adjust the path
-const { KitModel } = require('../models/kitModel'); // Adjust the path
+const { UserModel } = require('../models/userModel');
 
 async function addKitsToUser() {
   try {
@@ -8,9 +7,7 @@ async function addKitsToUser() {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-
-    // Fetch the user by its ID
-    const user = await UserModel.findById('64e61e8b7aecdc67f8632357');
+    const user = await UserModel.findById('6513db1ef0661f537cf22d34');
 
     if (!user) {
       console.error('User not found');
@@ -28,7 +25,6 @@ async function addKitsToUser() {
   } catch (error) {
     console.error('Error adding kits to user:', error);
   } finally {
-    // Close the Mongoose connection when you're done
     await mongoose.connection.close();
   }
 }
