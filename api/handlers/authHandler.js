@@ -13,7 +13,7 @@ const createAndRegisterUser = handleRequest(async (req, res) => {
     maxAge: 36000000,
     signed: true,
   });
-  return { user, token };
+  return { authToken: token, user: user };
 });
 
 // const getUserDetails = handleRequest(async (req) => {

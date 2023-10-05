@@ -1,4 +1,5 @@
 const { KitModel } = require('../../models/kitModel');
+const { UserModel } = require('../../models/userModel');
 const ExpressError = require('../../utils/expressError');
 const handleRequest = require('../../utils/requestHandler');
 const { invalidateKitCache, getAndCachePageDataFromDb } = require('../../services/dbService');
@@ -10,10 +11,12 @@ const createKit = handleRequest(async (req) => {
 });
 
 const getUserKits = handleRequest(async (req) => {
-  const kits = await KitModel.find({ userId: req.loggedinUser._id });
-  if (!kits) {
-    throw new ExpressError('No kits found for this user', 404);
-  }
+  const user = await UserModel.findById(req.params.id);
+  if (!user) throw new ExpressError('User not found', 404);
+
+  const kits = await KitModel.find({ _id: { $in: user.kits } });
+  if (!kits) throw new ExpressError('No kits found for this user', 404);
+
   return kits;
 });
 
@@ -91,49 +94,3 @@ module.exports = {
   updateKitById,
   deleteKitById,
 };
-
-// const getKitById = handleRequest(async (req) => {
-//   const { kitId } = req.params;
-//   const kit = await KitModel.findById(kitId);
-//   if (!kit) {
-//     throw new ExpressError('Kit not found', 404);
-//   }
-//   return kit;
-// });
-
-// const updateKitById = handleRequest(async (req) => {
-//   const { kitId } = req.params;
-//   // Finding the kit for cache invalidation
-//   const existingKit = await KitModel.findById(kitId);
-//   if (!existingKit) {
-//     throw new ExpressError('Kit not found', 404);
-//   }
-//   const kit = await KitModel.findByIdAndUpdate(kitId, req.body, {
-//     new: true,
-//   });
-//   // Invalidate the cache for the kit using its name
-//   invalidateKitCache(existingKit.name);
-//   // Update the cache with the new data
-//   await getAndCachePageDataFromDb(existingKit.name, (forceUpdate = true));
-//   return kit;
-// });
-
-// const deleteKitById = handleRequest(async (req) => {
-//   const { kitId } = req.params;
-//   const existingKit = await KitModel.findById(kitId);
-//   if (!existingKit) {
-//     throw new ExpressError('Kit not found', 404);
-//   }
-//   await KitModel.findByIdAndDelete(kitId);
-//   invalidateKitCache(existingKit.name);
-//   return null;
-// });
-
-// module.exports = {
-//   createKit,
-//   getAllKits,
-//   getUserKits,
-//   getKitById,
-//   updateKitById,
-//   deleteKitById,
-// };

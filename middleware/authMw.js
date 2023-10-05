@@ -4,8 +4,6 @@ const ExpressError = require('../utils/expressError');
 function authMw(req, res, next) {
   const token = req.signedCookies.authToken;
   // const loggedinUser = req.query.loggedinUser || req.params.loggedinUser;
-
-  // const loggedinUser =
   // const authHeader = req.headers['authorization'];
   // const token = authHeader && authHeader.split(' ')[1];
   if (!token) throw new ExpressError('Access denied. No token provided.', 401);
