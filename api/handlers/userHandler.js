@@ -1,4 +1,5 @@
 const { UserModel } = require('../../models/userModel');
+const { KitModel } = require('../../models/kitModel');
 const handleRequest = require('../../utils/requestHandler');
 const ExpressError = require('../../utils/expressError');
 
@@ -8,14 +9,34 @@ const createUser = handleRequest(async (req) => {
   return user;
 });
 
-// const getUserById = handleRequest(async (req) => {
-//   const user = await UserModel.findById(req.params.id);
-//   console.log('user in getByID: ', user);
-//   if (!user) {
-//     throw new ExpressError('User not found', 404);
-//   }
-//   return user;
-// });
+const getUserKits = handleRequest(async (req) => {
+  const user = await UserModel.findById(req.params.id);
+  if (!user) throw new ExpressError('User not found', 404);
+
+  const kits = await KitModel.find({ _id: { $in: user.kits } });
+  if (!kits) throw new ExpressError('No kits found for this user', 404);
+
+  return kits;
+});
+
+const addKitToUser = handleRequest(async (req) => {
+  const userId = req.params.id;
+  if (!userId) throw new ExpressError('User ID not provided', 400);
+
+  const kitId = req.params.kitId;
+  if (!kitId) throw new ExpressError('Kit ID not provided', 400);
+
+  const user = await UserModel.findById(userId);
+  if (!user) throw new ExpressError('User not found', 404);
+
+  const kit = await KitModel.findById(kitId);
+  if (!kit) throw new ExpressError('Kit not found', 404);
+
+  user.kits.push(kit._id);
+  await user.save();
+
+  return user;
+});
 
 const getAllUsers = handleRequest(async () => {
   return await UserModel.find({});
@@ -38,7 +59,8 @@ const deleteUser = handleRequest(async (req) => {
 
 module.exports = {
   createUser,
-  // getUserById,
+  getUserKits,
+  addKitToUser,
   getAllUsers,
   updateUser,
   deleteUser,

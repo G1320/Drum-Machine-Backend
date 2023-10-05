@@ -10,16 +10,6 @@ const createKit = handleRequest(async (req) => {
   return kit;
 });
 
-const getUserKits = handleRequest(async (req) => {
-  const user = await UserModel.findById(req.params.id);
-  if (!user) throw new ExpressError('User not found', 404);
-
-  const kits = await KitModel.find({ _id: { $in: user.kits } });
-  if (!kits) throw new ExpressError('No kits found for this user', 404);
-
-  return kits;
-});
-
 const getAllKits = handleRequest(async (req) => {
   let query = KitModel.find();
   if (req.query.name) {
@@ -45,16 +35,6 @@ const getKitById = handleRequest(async (req) => {
     throw new ExpressError('Kit not found', 404);
   }
   return kit;
-});
-
-const getKitsByIds = handleRequest(async (req) => {
-  const { kitIds } = req.params;
-  const ids = kitIds.split(',');
-  const kits = await KitModel.find({ _id: { $in: ids } });
-  if (!kits) {
-    throw new ExpressError('No kits found for these ids', 404);
-  }
-  return kits;
 });
 
 const updateKitById = handleRequest(async (req) => {
@@ -88,8 +68,6 @@ const deleteKitById = handleRequest(async (req) => {
 module.exports = {
   createKit,
   getAllKits,
-  getUserKits,
-  getKitsByIds,
   getKitById,
   updateKitById,
   deleteKitById,

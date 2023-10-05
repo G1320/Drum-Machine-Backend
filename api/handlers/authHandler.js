@@ -16,25 +16,6 @@ const createAndRegisterUser = handleRequest(async (req, res) => {
   return { authToken: token, user: user };
 });
 
-// const getUserDetails = handleRequest(async (req) => {
-//   let token = req.signedCookies.authToken;
-//   console.log('GOT token in getUserDetails from Cookies : ', token);
-//   if (!token) {
-//     token = sessionStorage.getItem('authToken');
-//     console.log('GOT token in getUserDetails from sessionStorage : ', token);
-//   }
-//   try {
-//     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-//     const user = await UserModel.findById(decoded._id).lean(false);
-//     console.log('user in getUserDetails : ', user);
-//     if (!user) throw new ExpressError('User not found', 404);
-//     return user;
-//   } catch (error) {
-//     console.error('Failed to verify authentication token:', error);
-//     throw new ExpressError('Invalid authentication token', 401);
-//   }
-// });
-
 const loginUser = handleRequest(async (req, res) => {
   const userCred = await UserModel.findOne({ username: req.body.username }).select('password');
   if (!userCred) throw new ExpressError('Invalid username', 400);
@@ -66,6 +47,5 @@ const logoutUser = handleRequest(async (req, res) => {
 module.exports = {
   createAndRegisterUser,
   loginUser,
-  // getUserDetails,
   logoutUser,
 };
