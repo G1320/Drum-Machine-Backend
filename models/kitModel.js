@@ -9,7 +9,6 @@ const soundSchema = new mongoose.Schema({
 });
 
 const kitSchema = new mongoose.Schema({
-  _id: { type: ObjectId, required: false },
   name: { type: String, required: true },
   subscribers: { type: Number, required: true },
   description: { type: String, required: true },

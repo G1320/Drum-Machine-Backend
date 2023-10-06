@@ -9,7 +9,7 @@ module.exports.getPageDataById = async (req, res, next) => {
     if (data) res.json(data);
     else throw new ExpressError('Page not found', 404);
   } catch (error) {
-    next(error);
+    console.error(error);
   }
 };
 
@@ -20,7 +20,7 @@ module.exports.getPageDataByName = async (req, res, next) => {
     if (data) res.json(data);
     else throw new ExpressError('Page not found', 404);
   } catch (error) {
-    next(error);
+    console.error(error);
   }
 };
 
