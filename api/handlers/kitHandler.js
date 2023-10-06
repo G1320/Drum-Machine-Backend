@@ -39,19 +39,18 @@ const getKitById = handleRequest(async (req) => {
 
 const updateKitById = handleRequest(async (req) => {
   const { kitId } = req.params;
-  // Finding the kit for cache invalidation
+
   const existingKit = await KitModel.findById(kitId);
-  if (!existingKit) {
-    throw new ExpressError('Kit not found', 404);
-  }
-  const kit = await KitModel.findByIdAndUpdate(kitId, req.body, {
+  if (!existingKit) throw new ExpressError('Kit not found', 404);
+
+  const updatedKit = await KitModel.findByIdAndUpdate(kitId, req.body, {
     new: true,
   });
   // Invalidate the cache for the kit using its name
-  invalidateKitCache(existingKit.name);
+  invalidateKitCache(kitId);
   // Update the cache with the new data
-  await getAndCachePageDataFromDb(existingKit.name, (forceUpdate = true));
-  return kit;
+  await getAndCachePageDataFromDb(kitId, (forceUpdate = true));
+  return updatedKit;
 });
 
 const deleteKitById = handleRequest(async (req) => {
@@ -61,7 +60,7 @@ const deleteKitById = handleRequest(async (req) => {
     throw new ExpressError('Kit not found', 404);
   }
   await KitModel.findByIdAndDelete(kitId);
-  invalidateKitCache(existingKit.name);
+  invalidateKitCache(kitId);
   return null;
 });
 

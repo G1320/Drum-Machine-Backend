@@ -38,6 +38,25 @@ const addKitToUser = handleRequest(async (req) => {
   return user;
 });
 
+const removeKitFromUser = handleRequest(async (req) => {
+  const userId = req.params.id;
+  if (!userId) throw new ExpressError('User ID not provided', 400);
+
+  const kitId = req.params.kitId;
+  if (!kitId) throw new ExpressError('Kit ID not provided', 400);
+
+  const user = await UserModel.findById(userId);
+  if (!user) throw new ExpressError('User not found', 404);
+
+  const kit = await KitModel.findById(kitId);
+  if (!kit) throw new ExpressError('Kit not found', 404);
+
+  user.kits.pull(kit._id);
+  await user.save();
+
+  return user;
+});
+
 const getAllUsers = handleRequest(async () => {
   return await UserModel.find({});
 });
@@ -61,6 +80,7 @@ module.exports = {
   createUser,
   getUserKits,
   addKitToUser,
+  removeKitFromUser,
   getAllUsers,
   updateUser,
   deleteUser,

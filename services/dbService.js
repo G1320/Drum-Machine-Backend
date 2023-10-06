@@ -17,7 +17,7 @@ const getAndCachePageDataFromDb = async (identifier, forceUpdate = false) => {
     }
     // Store the result in the cache, with an expiration time
     cache.set(identifier, data);
-    setTimeout(() => cache.delete(identifier), 1000 * 60 * 5);
+    setTimeout(() => invalidateKitCache(identifier), 1000 * 60 * 5);
     return data;
   } catch (error) {
     console.error('Error fetching data from database:', error);
