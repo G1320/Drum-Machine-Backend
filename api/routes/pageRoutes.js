@@ -4,7 +4,6 @@ const { validatePageName } = require('../../middleware/mw');
 const { getPageDataByName, serveFrontend, getPageDataById } = require('../handlers/pageHandler');
 const handleRequest = require('../../utils/requestHandler');
 
-// router.get('/pages/:pageName', validatePageName, handleRequest(serveFrontend));
 router.get('/api/pageData/:pageName', validatePageName, handleRequest(getPageDataByName));
 router.get('/pages/id/:pageId', serveFrontend);
 router.get('/api/pageData/id/:pageId', handleRequest(getPageDataById));

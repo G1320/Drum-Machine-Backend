@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const mongoSanitize = require('express-mongo-sanitize');
 
 const { handleErrorMw, handleDbErrorMw, logRequestsMw } = require('./middleware/mw');
 const connectToDb = require('./db/mongoose');
@@ -15,11 +16,20 @@ const authRoutes = require('./api/routes/authRoutes');
 connectToDb();
 
 const app = express();
-app.use(cors());
+const corsOptions = {
+  origin: ['http://127.0.0.1:5173', 'http://localhost:5173'],
+  credentials: true,
+};
+app.use(cors(corsOptions));
+app.use(mongoSanitize());
 app.use(cookieParser(process.env.JWT_SECRET_KEY));
 
 app.use((req, res, next) => {
   res.setHeader('Permissions-Policy', 'interest-cohort=()');
+
+  next();
+});
+app.use((req, res, next) => {
   next();
 });
 

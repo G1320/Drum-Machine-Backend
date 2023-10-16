@@ -1,5 +1,4 @@
 const { KitModel } = require('../../models/kitModel');
-const { UserModel } = require('../../models/userModel');
 const ExpressError = require('../../utils/expressError');
 const handleRequest = require('../../utils/requestHandler');
 const { invalidateKitCache, getAndCachePageDataFromDb } = require('../../services/dbService');

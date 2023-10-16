@@ -9,7 +9,8 @@ const userSchema = new mongoose.Schema(
     lastName: { type: String, required: true },
     avatar: { type: String }, // URL to user's avatar
     password: { type: String, select: false },
-    role: { type: String, default: 'user' },
+    // role: { type: String, default: 'user' },
+    isAdmin: { type: Boolean, default: false },
     kits: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Kit' }],
   },
   { timestamps: true }

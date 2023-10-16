@@ -2,7 +2,6 @@ const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
 
 const soundSchema = new mongoose.Schema({
-  _id: { type: ObjectId, required: false },
   title: { type: String, required: false },
   author: { type: String, required: false },
   img: { type: String, required: false },

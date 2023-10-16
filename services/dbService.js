@@ -1,5 +1,5 @@
 const { KitModel } = require('../models/kitModel');
-const mongoose = require('mongoose'); // Needed to use ObjectId.isValid
+const { Types } = require('mongoose');
 const cache = new Map(); // A simple in-memory cache
 
 const getAndCachePageDataFromDb = async (identifier, forceUpdate = false) => {
@@ -12,7 +12,7 @@ const getAndCachePageDataFromDb = async (identifier, forceUpdate = false) => {
   try {
     let data;
     // Check if the identifier is a MongoDB ObjectId format
-    if (mongoose.Types.ObjectId.isValid(identifier)) {
+    if (Types.ObjectId.isValid(identifier)) {
       data = await KitModel.findById(identifier);
     }
     // Store the result in the cache, with an expiration time
@@ -34,9 +34,8 @@ const updateKit = async (kitId, updatedData) => {
     const updatedKit = await KitModel.findByIdAndUpdate(kitId, updatedData, { new: true });
     // Invalidate the cache entry for the kit
     invalidateKitCache(kitId); // Invalidate using kitId
-    if (updatedData.name) {
-      invalidateKitCache(updatedData.name); // Also invalidate using kit name in case it changed
-    }
+    if (updatedData.name) invalidateKitCache(updatedData.name); // Also invalidate using kit name in case it changed
+
     return updatedKit;
   } catch (error) {
     console.error('Error updating kit:', error);

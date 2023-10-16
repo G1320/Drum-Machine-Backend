@@ -6,7 +6,6 @@ const authMw = require('../../middleware/authMw');
 
 const router = express.Router();
 
-// authMw secures the endpoint to allow only authorized users to perform CRUD on kits
 router.get('/', kitHandler.getAllKits);
 router.get('/:kitId', validateKit, kitHandler.getKitById);
 router.post('/', authMw, kitHandler.createKit);
