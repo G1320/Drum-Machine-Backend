@@ -33,7 +33,7 @@ const updateKit = async (kitId, updatedData) => {
   try {
     const updatedKit = await KitModel.findByIdAndUpdate(kitId, updatedData, { new: true });
     // Invalidate the cache entry for the kit
-    invalidateKitCache(kitId); // Invalidate using kitId
+    invalidateKitCache(kitId);
     if (updatedData.name) invalidateKitCache(updatedData.name); // Also invalidate using kit name in case it changed
 
     return updatedKit;

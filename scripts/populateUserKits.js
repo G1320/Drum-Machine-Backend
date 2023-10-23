@@ -2,12 +2,13 @@ const mongoose = require('mongoose');
 const { UserModel } = require('../models/userModel');
 
 async function addKitsToUser() {
+  const userId = '6513db1ef0661f537cf22d34';
   try {
     await mongoose.connect('mongodb://localhost:27017/appdb', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    const user = await UserModel.findById('6513db1ef0661f537cf22d34');
+    const user = await UserModel.findById(userId);
 
     if (!user) {
       console.error('User not found');

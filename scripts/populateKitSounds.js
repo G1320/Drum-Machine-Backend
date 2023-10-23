@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const { KitModel } = require('../models/kitModel');
-// const { SoundsModel } = require('../models/soundModel');
 
 async function populateKitSounds() {
   const kitId = '64e61e8b7aecdc67f8632329';

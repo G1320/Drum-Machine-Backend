@@ -41,15 +41,10 @@ const getKitSounds = handleRequest(async (req) => {
   const { kitId } = req.params;
   try {
     const kit = await KitModel.findById(kitId);
-    // console.log('kit: ', kit);
-    if (!kit) {
-      throw new Error('Kit not found');
-    }
+    if (!kit) throw new Error('Kit not found');
 
     const sounds = await SoundModel.find({ _id: { $in: kit.sounds } });
-    if (!sounds) {
-      throw new Error('No sounds found for this kit');
-    }
+    if (!sounds) throw new Error('No sounds found for this kit');
 
     return sounds;
   } catch (error) {
@@ -76,10 +71,10 @@ const updateKitById = handleRequest(async (req) => {
 
 const deleteKitById = handleRequest(async (req) => {
   const { kitId } = req.params;
+
   const existingKit = await KitModel.findById(kitId);
-  if (!existingKit) {
-    throw new ExpressError('Kit not found', 404);
-  }
+  if (!existingKit) throw new ExpressError('Kit not found', 404);
+
   await KitModel.findByIdAndDelete(kitId);
   invalidateKitCache(kitId);
   return null;
