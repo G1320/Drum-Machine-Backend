@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { SoundsModel } = require('../models/soundsModal');
 const { KitModel } = require('../models/kitModel');
 const { UserModel } = require('../models/userModel');
 const connectToDb = require('../db/mongoose');
@@ -19,6 +20,7 @@ async function main() {
   try {
     await connectToDb();
 
+    await exportDocument(SoundsModel, path.join(__dirname, '../data/sounds.json'));
     await exportDocument(KitModel, path.join(__dirname, '../data/categories-export.json'));
     await exportDocument(UserModel, path.join(__dirname, '../data/users-export.json'));
   } catch (err) {

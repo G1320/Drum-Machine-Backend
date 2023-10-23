@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { KitModel } = require('../models/kitModel');
 const { UserModel } = require('../models/userModel');
+const { SoundsModel } = require('../models/soundModel');
 const connectToDb = require('../db/mongoose');
 const path = require('path');
 const { readAndParseJsonFile } = require('../utils/fileUtils');
@@ -31,8 +32,9 @@ async function importData(model, filePath, uniqueField) {
 async function main() {
   try {
     await connectToDb();
-    await importData(KitModel, path.join(__dirname, '../data/categories.json'), 'name');
-    await importData(UserModel, path.join(__dirname, '../data/users.json'), 'username');
+    await importData(SoundsModel, path.join(__dirname, '../data/sounds.json'), 'src');
+    // await importData(KitModel, path.join(__dirname, '../data/kits-export.json'), 'name');
+    // await importData(UserModel, path.join(__dirname, '../data/users.json'), 'username');
   } catch (err) {
     console.error('Error:', err);
   } finally {

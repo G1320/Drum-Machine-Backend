@@ -7,17 +7,17 @@
     "posts": [
       {
         "title": "Marten de Roon to make pizza for more than 1,000 people in Bergamo if Atalanta win the Champions league.",
-        "author": "joeextreme",
+        "url": "joeextreme",
         "_id": "64e61e8b7aecdc67f863232a"
       },
       {
         "title": "Stephan Lichtsteiner has retired from professional football",
-        "author": "odd person",
+        "url": "odd person",
         "_id": "64e61e8b7aecdc67f863232b"
       },
       {
         "title": "OFFICIAL: Dani Parejo signs for Villareal.",
-        "author": "joeextreme",
+        "url": "joeextreme",
         "_id": "64e61e8b7aecdc67f863232c"
       }
     ],
@@ -32,18 +32,18 @@
     "posts": [
       {
         "title": "Naughty chicken hid under a shed for 3 weeks and came home with 14 chicks today!",
-        "author": "joeextreme",
+        "url": "joeextreme",
         "img": "https://preview.redd.it/sja35au7whd51.jpg?width=640&crop=smart&auto=webp&s=c39f8a99896b55fafc5d0ed882040a963ca54409",
         "_id": "64e61e8b7aecdc67f8632332"
       },
       {
         "title": "Had to kill my first chicken today. Does it get any easier?",
-        "author": "sad boi",
+        "url": "sad boi",
         "_id": "64e61e8b7aecdc67f8632333"
       },
       {
         "title": "My five year old chicken set and hatched one baby. I guess she wanted to be a mama one more time.",
-        "author": "tammythetiger",
+        "url": "tammythetiger",
         "img": "https://preview.redd.it/lervkuis3me51.jpg?width=640&crop=smart&auto=webp&s=6a18ab3c4daa80eccf3449217589b922fa443946",
         "_id": "64e61e8b7aecdc67f8632334"
       }

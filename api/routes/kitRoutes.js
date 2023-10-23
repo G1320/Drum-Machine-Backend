@@ -11,5 +11,6 @@ router.get('/:kitId', validateKit, kitHandler.getKitById);
 router.post('/', authMw, kitHandler.createKit);
 router.put('/:kitId', authMw, validateKit, kitHandler.updateKitById);
 router.delete('/:kitId', authMw, kitHandler.deleteKitById);
+router.get('/:kitId/sounds', kitHandler.getKitSounds);
 
 module.exports = router;

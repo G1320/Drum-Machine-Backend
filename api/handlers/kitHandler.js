@@ -1,4 +1,5 @@
 const { KitModel } = require('../../models/kitModel');
+const { SoundModel } = require('../../models/soundModel');
 const ExpressError = require('../../utils/expressError');
 const handleRequest = require('../../utils/requestHandler');
 const { invalidateKitCache, getAndCachePageDataFromDb } = require('../../services/dbService');
@@ -36,6 +37,27 @@ const getKitById = handleRequest(async (req) => {
   return kit;
 });
 
+const getKitSounds = handleRequest(async (req) => {
+  const { kitId } = req.params;
+  try {
+    const kit = await KitModel.findById(kitId);
+    // console.log('kit: ', kit);
+    if (!kit) {
+      throw new Error('Kit not found');
+    }
+
+    const sounds = await SoundModel.find({ _id: { $in: kit.sounds } });
+    if (!sounds) {
+      throw new Error('No sounds found for this kit');
+    }
+
+    return sounds;
+  } catch (error) {
+    console.error('Error getting kit sounds:', error);
+    throw new Error('Internal server error');
+  }
+});
+
 const updateKitById = handleRequest(async (req) => {
   const { kitId } = req.params;
 
@@ -67,6 +89,7 @@ module.exports = {
   createKit,
   getAllKits,
   getKitById,
+  getKitSounds,
   updateKitById,
   deleteKitById,
 };

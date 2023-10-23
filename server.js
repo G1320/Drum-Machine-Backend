@@ -1,4 +1,4 @@
-const { port, ALLOWED_ORIGINS, JWT_SECRET_KEY } = require('./config');
+const { PORT, ALLOWED_ORIGINS, JWT_SECRET_KEY } = require('./config');
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
@@ -17,6 +17,7 @@ connectToDb();
 
 const app = express();
 const corsOptions = { origin: { ALLOWED_ORIGINS }, credentials: true };
+
 app.use(cors(corsOptions));
 app.use(mongoSanitize());
 app.use(cookieParser(JWT_SECRET_KEY));
@@ -45,6 +46,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../Frontend/dist/index.html'));
 });
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
 });

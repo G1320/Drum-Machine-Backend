@@ -1,17 +1,11 @@
-const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
-
-const soundSchema = new mongoose.Schema({
-  title: { type: String, required: false },
-  author: { type: String, required: false },
-  img: { type: String, required: false },
-});
+const { SoundModel } = require('./soundModel');
 
 const kitSchema = new mongoose.Schema({
   name: { type: String, required: true },
   subscribers: { type: Number, required: true },
   description: { type: String, required: true },
-  sounds: [soundSchema],
+  sounds: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Sound' }],
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 });
 

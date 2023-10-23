@@ -40,8 +40,9 @@ const validateUser = (req, res, next) => {
 const validateKit = (req, res, next) => {
   const soundSchema = Joi.object({
     _id: Joi.string().optional(),
+    keyCode: Joi.string().optional().label('Sound Title'),
     title: Joi.string().optional().label('Sound Title'),
-    author: Joi.string().optional().label('Sound Author'),
+    src: Joi.string().optional().label('Sound Url'),
     img: Joi.string().optional().label('Sound Image URL'),
   });
 
