@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
-const ExpressError = require('../utils/expressError');
+const ExpressError = require('../../utils/expressError');
 
-function authMw(req, res, next) {
+function verifyTokenMw(req, res, next) {
   const token = req.signedCookies.authToken;
 
   if (!token) throw new ExpressError('Access denied. No token provided.', 401);
@@ -14,4 +14,4 @@ function authMw(req, res, next) {
   }
 }
 
-module.exports = authMw;
+module.exports = verifyTokenMw;

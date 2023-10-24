@@ -4,14 +4,14 @@ const path = require('path');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoSanitize = require('express-mongo-sanitize');
-
-const { handleErrorMw, handleDbErrorMw, logRequestsMw } = require('./middleware/mw');
 const connectToDb = require('./db/mongoose');
 const kitRoutes = require('./api/routes/kitRoutes');
 const userRoutes = require('./api/routes/userRoutes');
 const searchRoutes = require('./api/routes/searchRoutes');
 const pageRoutes = require('./api/routes/pageRoutes');
 const authRoutes = require('./api/routes/authRoutes');
+
+const { handleErrorMw, handleDbErrorMw, logRequestsMw } = require('./middleware');
 
 connectToDb();
 

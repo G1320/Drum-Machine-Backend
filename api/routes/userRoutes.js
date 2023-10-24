@@ -1,15 +1,14 @@
 const express = require('express');
 const userHandler = require('../handlers/userHandler');
-const { validateUser } = require('../../middleware/mw');
-const authMw = require('../../middleware/authMw');
+const { validateUser, verifyTokenMw } = require('../../middleware');
 
 const router = express.Router();
 
 router.get('/', userHandler.getAllUsers);
-router.get('/my-kits/:id', authMw, userHandler.getUserKits);
+router.get('/my-kits/:id', verifyTokenMw, userHandler.getUserKits);
 router.post('/', validateUser, userHandler.createUser);
 router.put('/:id', validateUser, userHandler.updateUser);
 router.delete('/:id', userHandler.deleteUser);
-router.post('/:id/add-kit/:kitId', authMw, userHandler.addKitToUser);
-router.post('/:id/remove-kit/:kitId', authMw, userHandler.removeKitFromUser);
+router.post('/:id/add-kit/:kitId', verifyTokenMw, userHandler.addKitToUser);
+router.post('/:id/remove-kit/:kitId', verifyTokenMw, userHandler.removeKitFromUser);
 module.exports = router;
