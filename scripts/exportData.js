@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { SoundsModel } = require('../models/soundsModel');
+const { SoundsModel } = require('../models/soundModel');
 const { KitModel } = require('../models/kitModel');
 const { UserModel } = require('../models/userModel');
 const connectToDb = require('../db/mongoose');

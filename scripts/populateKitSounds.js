@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { KitModel } = require('../models/kitModel');
 
 async function populateKitSounds() {
-  const kitId = '64e61e8b7aecdc67f8632329';
+  const kitId = '64e61e8b7aecdc67f8632331';
   try {
     await mongoose.connect('mongodb://localhost:27017/appdb', {
       useNewUrlParser: true,
@@ -16,15 +16,15 @@ async function populateKitSounds() {
       return;
     }
     const soundIdsToAdd = [
-      new mongoose.Types.ObjectId('6530e527d1fcdfacbc674bfe'),
-      new mongoose.Types.ObjectId('6530e527d1fcdfacbc674bff'),
-      new mongoose.Types.ObjectId('6530e527d1fcdfacbc674c00'),
-      new mongoose.Types.ObjectId('6530e527d1fcdfacbc674c01'),
-      new mongoose.Types.ObjectId('6530e527d1fcdfacbc674c02'),
-      new mongoose.Types.ObjectId('6530e527d1fcdfacbc674c03'),
-      new mongoose.Types.ObjectId('6530e527d1fcdfacbc674c04'),
-      new mongoose.Types.ObjectId('6530e527d1fcdfacbc674c05'),
-      new mongoose.Types.ObjectId('6530e527d1fcdfacbc674c06'),
+      new mongoose.Types.ObjectId('6538c7f2160b633fe14036b6'),
+      new mongoose.Types.ObjectId('6538c7f2160b633fe14036b2'),
+      new mongoose.Types.ObjectId('6538c7f2160b633fe14036bc'),
+      new mongoose.Types.ObjectId('6538c7f2160b633fe14036c0'),
+      new mongoose.Types.ObjectId('6538c7f2160b633fe14036c7'),
+      new mongoose.Types.ObjectId('6538c7f2160b633fe14036b8'),
+      new mongoose.Types.ObjectId('6538c7f2160b633fe14036ba'),
+      new mongoose.Types.ObjectId('6538c7f2160b633fe14036b4'),
+      new mongoose.Types.ObjectId('6538c7f2160b633fe14036b0'),
     ];
 
     kit.sounds.push(...soundIdsToAdd);

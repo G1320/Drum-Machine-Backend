@@ -52,5 +52,59 @@
     "title": "C",
     "src": "https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3",
     "img": "https://source.unsplash.com/random"
+  }, 
+  {
+    "keyCode": 81,
+    "title": "Q",
+    "src": "https://res.cloudinary.com/dngzwndvh/video/upload/v1698219375/LAZER_PITCH_xq1wsz.wav",
+    "img": "https://source.unsplash.com/random"
+  },
+  {
+    "keyCode": 87,
+    "title": "W",
+    "src": "https://res.cloudinary.com/dngzwndvh/video/upload/v1698219371/SAKURAA_ORIG_sdepde.wav",
+    "img": "https://source.unsplash.com/random"
+  },
+  {
+    "keyCode": 69,
+    "title": "E",
+    "src": "https://res.cloudinary.com/dngzwndvh/video/upload/v1698219366/SAKURA_lzu5ea.wav",
+    "img": "https://source.unsplash.com/random"
+  },
+  {
+    "keyCode": 65,
+    "title": "A",
+    "src": "https://res.cloudinary.com/dngzwndvh/video/upload/v1698219366/VO0_b9tu8i.wav",
+    "img": "https://source.unsplash.com/random"
+  },
+  {
+    "keyCode": 83,
+    "title": "S",
+    "src": "https://res.cloudinary.com/dngzwndvh/video/upload/v1698219365/SYNTH_r65bdv.wav",
+    "img": "https://source.unsplash.com/random"
+  },
+  {
+    "keyCode": 68,
+    "title": "D",
+    "src": "https://res.cloudinary.com/dngzwndvh/video/upload/v1698219364/DEEP_END_zddidu.wav",
+    "img": "https://source.unsplash.com/random"
+  },
+  {
+    "keyCode": 90,
+    "title": "Z",
+    "src": "https://res.cloudinary.com/dngzwndvh/video/upload/v1698219363/SPLASH_gtrgpt.wav",
+    "img": "https://source.unsplash.com/random"
+  },
+  {
+    "keyCode": 88,
+    "title": "X",
+    "src": "https://res.cloudinary.com/dngzwndvh/video/upload/v1698219361/MB01_jmspca.wav",
+    "img": "https://source.unsplash.com/random"
+  },
+  {
+    "keyCode": 67,
+    "title": "C",
+    "src": "https://res.cloudinary.com/dngzwndvh/video/upload/v1698219362/SAKURA_LPF_xhykti.wav",
+    "img": "https://source.unsplash.com/random"
   }
 ]
