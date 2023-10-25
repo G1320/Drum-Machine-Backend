@@ -18,6 +18,13 @@ async function populateKitSounds() {
     const soundIdsToAdd = [
       new mongoose.Types.ObjectId('6530e527d1fcdfacbc674bfe'),
       new mongoose.Types.ObjectId('6530e527d1fcdfacbc674bff'),
+      new mongoose.Types.ObjectId('6530e527d1fcdfacbc674c00'),
+      new mongoose.Types.ObjectId('6530e527d1fcdfacbc674c01'),
+      new mongoose.Types.ObjectId('6530e527d1fcdfacbc674c02'),
+      new mongoose.Types.ObjectId('6530e527d1fcdfacbc674c03'),
+      new mongoose.Types.ObjectId('6530e527d1fcdfacbc674c04'),
+      new mongoose.Types.ObjectId('6530e527d1fcdfacbc674c05'),
+      new mongoose.Types.ObjectId('6530e527d1fcdfacbc674c06'),
     ];
 
     kit.sounds.push(...soundIdsToAdd);

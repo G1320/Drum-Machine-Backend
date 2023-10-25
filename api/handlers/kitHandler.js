@@ -41,10 +41,10 @@ const getKitSounds = handleRequest(async (req) => {
   const { kitId } = req.params;
   try {
     const kit = await KitModel.findById(kitId);
-    if (!kit) throw new Error('Kit not found');
+    if (!kit) throw new ExpressError('Kit not found', 404);
 
     const sounds = await SoundModel.find({ _id: { $in: kit.sounds } });
-    if (!sounds) throw new Error('No sounds found for this kit');
+    if (!sounds) throw new ExpressError('No sounds found for this kit', 404);
 
     return sounds;
   } catch (error) {
