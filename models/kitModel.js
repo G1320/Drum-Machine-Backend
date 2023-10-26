@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { SoundModel } = require('./soundModel');
 
 const kitSchema = new mongoose.Schema({
   name: { type: String, required: true },

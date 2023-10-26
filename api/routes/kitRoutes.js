@@ -6,7 +6,7 @@ const { validateKit, verifyTokenMw } = require('../../middleware');
 
 router.get('/', kitHandler.getAllKits);
 router.get('/:kitId', validateKit, kitHandler.getKitById);
-router.post('/', verifyTokenMw, kitHandler.createKit);
+router.post('/', verifyTokenMw, validateKit, kitHandler.createKit);
 router.put('/:kitId', verifyTokenMw, validateKit, kitHandler.updateKitById);
 router.delete('/:kitId', verifyTokenMw, kitHandler.deleteKitById);
 router.get('/:kitId/sounds', kitHandler.getKitSounds);

@@ -10,7 +10,6 @@ const validateUser = (req, res, next) => {
     avatar: Joi.string().label('Avatar').optional(),
     password: Joi.string().min(6).required().label('Password'),
     isAdmin: Joi.boolean().label('Admin access').optional(),
-    // role: Joi.string().valid('user', 'admin').default('user').label('Role'),
     createdAt: Joi.date().default(Date.now).label('Creation Date'),
     updatedAt: Joi.date().default(Date.now).label('Last Update'),
   });

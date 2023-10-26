@@ -58,7 +58,9 @@ const removeKitFromUser = handleRequest(async (req) => {
 });
 
 const getAllUsers = handleRequest(async () => {
-  return await UserModel.find({});
+  const users = await UserModel.find({});
+  if (!users) throw new ExpressError('No users found', 404);
+  return users;
 });
 
 const updateUser = handleRequest(async (req) => {
