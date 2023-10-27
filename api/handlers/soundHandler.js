@@ -40,8 +40,10 @@ const addSoundToKit = handleRequest(async (req) => {
   const sound = await SoundModel.findById(soundId);
   if (!sound) throw new ExpressError('sound not found', 404);
 
-  if (!kit.sounds.length >= 9) throw new ExpressError('Kit is full', 400);
-
+  if (kit.sounds.length > 8) throw new ExpressError('Kit is already full!', 400);
+  if (kit.sounds.includes(sound._id)) {
+    throw new ExpressError('Sound already exists in kit!', 400);
+  }
   kit.sounds.push(sound._id);
   await kit.save();
 
