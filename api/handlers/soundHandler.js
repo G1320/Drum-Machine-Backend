@@ -51,22 +51,22 @@ const addSoundToKit = handleRequest(async (req) => {
 });
 
 const removeSoundFromKit = handleRequest(async (req) => {
-  const userId = req.params.id;
-  if (!userId) throw new ExpressError('User ID not provided', 400);
+  const kitId = req.params.id;
+  if (!kitId) throw new ExpressError('Kit ID not provided', 400);
 
   const soundId = req.params.soundId;
   if (!soundId) throw new ExpressError('sound ID not provided', 400);
 
-  const user = await UserModel.findById(userId);
-  if (!user) throw new ExpressError('User not found', 404);
+  const kit = await KitModel.findById(kitId);
+  if (!kit) throw new ExpressError('kit not found', 404);
 
   const sound = await SoundModel.findById(soundId);
   if (!sound) throw new ExpressError('sound not found', 404);
 
-  user.sounds.pull(sound._id);
-  await user.save();
+  kit.sounds.pull(sound._id);
+  await kit.save();
 
-  return user;
+  return kit;
 });
 
 const getSoundById = handleRequest(async (req) => {
