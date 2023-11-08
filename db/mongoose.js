@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-// const ExpressError = require('../utils/expressError');
+// const { DB_URL } = require('../config/config');
 
 const connectToDb = async () => {
   try {
@@ -18,20 +18,9 @@ const connectToDb = async () => {
   }
 };
 
-mongoose.connection.on('connected', () => {
-  console.log('Mongoose connected');
-});
-
-mongoose.connection.on('disconnected', () => {
-  console.log('Mongoose disconnected');
-});
-
-mongoose.connection.on('reconnected', () => {
-  console.log('Mongoose reconnected');
-});
-
-mongoose.connection.on('error', (err) => {
-  console.log('Mongoose connection error:', err);
-});
+mongoose.connection.on('connected', () => console.log('Mongoose connected'));
+mongoose.connection.on('disconnected', () => console.log('Mongoose disconnected'));
+mongoose.connection.on('reconnected', () => console.log('Mongoose reconnected'));
+mongoose.connection.on('error', (err) => console.log('Mongoose connection error:', err));
 
 module.exports = connectToDb;

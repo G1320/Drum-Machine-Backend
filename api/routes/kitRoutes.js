@@ -5,7 +5,7 @@ const kitHandler = require('../handlers/kitHandler');
 const { validateKit, verifyTokenMw } = require('../../middleware');
 
 router.get('/', kitHandler.getAllKits);
-router.get('/:kitId', validateKit, kitHandler.getKitById);
+router.get('/:kitId', kitHandler.getKitById);
 router.post('/', verifyTokenMw, validateKit, kitHandler.createKit);
 router.put('/:kitId', verifyTokenMw, validateKit, kitHandler.updateKitById);
 router.delete('/:kitId', verifyTokenMw, kitHandler.deleteKitById);

@@ -1,4 +1,4 @@
-const { PORT, ALLOWED_ORIGINS, JWT_SECRET_KEY } = require('./config');
+const { PORT, ALLOWED_ORIGINS, JWT_SECRET_KEY } = require('./config/config');
 const express = require('express');
 const path = require('path');
 const cors = require('cors');

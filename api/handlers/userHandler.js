@@ -31,6 +31,9 @@ const addKitToUser = handleRequest(async (req) => {
 
   const kit = await KitModel.findById(kitId);
   if (!kit) throw new ExpressError('Kit not found', 404);
+  if (!kit.sounds) kit.sounds = [];
+  if (user.kits.includes(kit._id)) throw new ExpressError('Kit already added!', 400);
+  if (kit.sounds.length < 1) throw new ExpressError('Kit is empty, add some sounds first!', 400);
 
   user.kits.push(kit._id);
   await user.save();

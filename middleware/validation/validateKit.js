@@ -8,11 +8,13 @@ const validateKit = (req, res, next) => {
     title: Joi.string().optional().label('Sound Title'),
     src: Joi.string().optional().label('Sound Url'),
     img: Joi.string().optional().label('Sound Image URL'),
+    createdAt: Joi.date().default(Date.now).label('Creation Date'),
+    updatedAt: Joi.date().default(Date.now).label('Last Update'),
   });
 
   const schema = Joi.object({
     _id: Joi.string().optional(),
-    name: Joi.string().alphanum().min(2).max(30).required().label('Kit name'),
+    name: Joi.string().alphanum().min(2).max(10).required().label('Kit name'),
     subscribers: Joi.number().optional().label('Number of subscribers'),
     description: Joi.string().required().label('Kit description'),
     sounds: Joi.array().items(soundSchema).optional().label('Sounds array'),

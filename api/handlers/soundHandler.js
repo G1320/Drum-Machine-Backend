@@ -40,10 +40,12 @@ const addSoundToKit = handleRequest(async (req) => {
   const sound = await SoundModel.findById(soundId);
   if (!sound) throw new ExpressError('sound not found', 404);
 
-  if (kit.sounds.length > 8) throw new ExpressError('Kit is already full!', 400);
-  if (kit.sounds.includes(sound._id)) {
-    throw new ExpressError('Sound already exists in kit!', 400);
-  }
+  sound.updatedAt = new Date();
+  await sound.save();
+
+  if (kit.sounds.length > 31) throw new ExpressError('Sorry, Kit is already full!', 400);
+  if (kit.sounds.includes(sound._id)) throw new ExpressError('Kit already includes this sound!', 400);
+
   kit.sounds.push(sound._id);
   await kit.save();
 
@@ -72,27 +74,24 @@ const removeSoundFromKit = handleRequest(async (req) => {
 const getSoundById = handleRequest(async (req) => {
   const { soundId } = req.params;
   const sound = await SoundModel.findById(soundId);
-  if (!sound) {
-    throw new ExpressError('Sound not found', 404);
-  }
+  if (!sound) throw new ExpressError('Sound not found', 404);
+
   return sound;
 });
 
 const updateSoundById = handleRequest(async (req) => {
   const { soundId } = req.params;
   const sound = await SoundModel.findByIdAndUpdate(soundId, req.body, { new: true });
-  if (!sound) {
-    throw new ExpressError('Sound not found', 404);
-  }
+  if (!sound) throw new ExpressError('Sound not found', 404);
+
   return sound;
 });
 
 const deleteSoundById = handleRequest(async (req) => {
   const { soundId } = req.params;
   const sound = await SoundModel.findByIdAndDelete(soundId);
-  if (!sound) {
-    throw new ExpressError('Sound not found', 404);
-  }
+  if (!sound) throw new ExpressError('Sound not found', 404);
+
   return sound;
 });
 
