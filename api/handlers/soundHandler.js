@@ -5,6 +5,7 @@ const handleRequest = require('../../utils/requestHandler');
 
 const createSound = handleRequest(async (req) => {
   const sound = new SoundModel(req.body);
+
   await sound.save();
   return sound;
 });
