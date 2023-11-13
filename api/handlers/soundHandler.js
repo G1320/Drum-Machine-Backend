@@ -74,6 +74,8 @@ const removeSoundFromKit = handleRequest(async (req) => {
 
 const getSoundById = handleRequest(async (req) => {
   const { soundId } = req.params;
+  if (!soundId) throw new ExpressError('Sound ID not provided', 400);
+
   const sound = await SoundModel.findById(soundId);
   if (!sound) throw new ExpressError('Sound not found', 404);
 
@@ -82,6 +84,8 @@ const getSoundById = handleRequest(async (req) => {
 
 const updateSoundById = handleRequest(async (req) => {
   const { soundId } = req.params;
+  if (!soundId) throw new ExpressError('Sound ID not provided', 400);
+
   const sound = await SoundModel.findByIdAndUpdate(soundId, req.body, { new: true });
   if (!sound) throw new ExpressError('Sound not found', 404);
 
@@ -90,6 +94,8 @@ const updateSoundById = handleRequest(async (req) => {
 
 const deleteSoundById = handleRequest(async (req) => {
   const { soundId } = req.params;
+  if (!soundId) throw new ExpressError('Sound ID not provided', 400);
+
   const sound = await SoundModel.findByIdAndDelete(soundId);
   if (!sound) throw new ExpressError('Sound not found', 404);
 

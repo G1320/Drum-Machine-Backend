@@ -40,18 +40,46 @@ const getKitById = handleRequest(async (req) => {
 
 const getKitSounds = handleRequest(async (req) => {
   const { kitId } = req.params;
-  try {
-    const kit = await KitModel.findById(kitId);
-    if (!kit) throw new ExpressError('Kit not found', 404);
-    const sounds = await SoundModel.find({ _id: { $in: kit.sounds } });
-    if (!sounds) throw new ExpressError('No sounds found for this kit', 404);
 
-    sounds.sort((a, b) => a.updatedAt - b.updatedAt);
-    return sounds;
-  } catch (error) {
-    console.error('Error getting kit sounds:', error);
-    throw new Error('Internal server error');
+  const kit = await KitModel.findById(kitId);
+  if (!kit) throw new ExpressError('Kit not found', 404);
+
+  const sounds = await SoundModel.find({ _id: { $in: kit.sounds } });
+  if (!sounds) throw new ExpressError('No sounds found for this kit', 404);
+
+  sounds.sort((a, b) => a.updatedAt - b.updatedAt);
+  return sounds;
+});
+
+const updateKitSounds = handleRequest(async (req) => {
+  const { kitId, pageId } = req.params;
+  if (!kitId) throw new ExpressError('Kit ID not found', 404);
+  console.log('kitId: ', kitId);
+
+  const kit = await KitModel.findById(kitId);
+  if (!kit) throw new ExpressError('Kit not found', 404);
+  console.log('kit: ', kit);
+
+  const { sounds } = req.body;
+  if (!sounds || !Array.isArray(sounds)) {
+    throw new ExpressError('Invalid request body', 400);
   }
+
+  const soundIds = sounds.map((sound) => sound._id);
+  // Update the sounds for the kit
+  kit.sounds = soundIds;
+
+  const updatedKit = await kit.save().catch((err) => {
+    console.error(err);
+    throw new ExpressError('Failed to save changes to kit', 500);
+  });
+  console.log('updatedKit: ', updatedKit);
+  // Invalidate the cache for the kit using its name
+  invalidateKitCache(kitId);
+  // Update the cache with the new data
+  await getAndCachePageDataFromDb(kitId, (forceUpdate = true));
+
+  return updatedKit;
 });
 
 const updateKitById = handleRequest(async (req) => {
@@ -86,6 +114,7 @@ module.exports = {
   getAllKits,
   getKitById,
   getKitSounds,
+  updateKitSounds,
   updateKitById,
   deleteKitById,
 };
