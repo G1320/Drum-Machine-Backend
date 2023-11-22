@@ -4,6 +4,7 @@ const path = require('path');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet');
 const connectToDb = require('./db/mongoose');
 const kitRoutes = require('./api/routes/kitRoutes');
 const userRoutes = require('./api/routes/userRoutes');
@@ -22,6 +23,17 @@ const corsOptions = { origin: { ALLOWED_ORIGINS }, credentials: true };
 app.use(cors(corsOptions));
 app.use(mongoSanitize());
 app.use(cookieParser(JWT_SECRET_KEY));
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        connectSrc: ["'self'", 'res.cloudinary.com'],
+        workerSrc: ["'self'", 'blob:'],
+      },
+    },
+  })
+);
 
 app.use((req, res, next) => {
   res.setHeader('Permissions-Policy', 'interest-cohort=()');

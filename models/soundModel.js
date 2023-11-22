@@ -6,6 +6,7 @@ const soundSchema = new mongoose.Schema({
   src: { type: String, required: false },
   img: { type: String, required: false },
   kits: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Kit' }],
+  idx: { type: Number, required: false },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });

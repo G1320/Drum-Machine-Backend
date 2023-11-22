@@ -42,6 +42,8 @@ const addSoundToKit = handleRequest(async (req) => {
   if (!sound) throw new ExpressError('sound not found', 404);
 
   sound.updatedAt = new Date();
+
+  if (!sound.idx) sound.idx = kit.sounds.length;
   await sound.save();
 
   if (kit.sounds.length > 31) throw new ExpressError('Sorry, Kit is already full!', 400);

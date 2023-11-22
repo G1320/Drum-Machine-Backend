@@ -10,6 +10,7 @@ const validateKit = (req, res, next) => {
     img: Joi.string().optional().label('Sound Image URL'),
     createdAt: Joi.date().default(Date.now).label('Creation Date'),
     updatedAt: Joi.date().default(Date.now).label('Last Update'),
+    idx: Joi.number().optional(),
   });
 
   const schema = Joi.object({

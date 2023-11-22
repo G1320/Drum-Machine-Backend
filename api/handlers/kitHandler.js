@@ -32,10 +32,21 @@ const getKitById = handleRequest(async (req) => {
   const { kitId } = req.params;
 
   const kit = await KitModel.findById(kitId);
-  if (!kit) {
-    throw new ExpressError('Kit not found', 404);
-  }
-  return kit;
+  if (!kit) throw new ExpressError('Kit not found', 404);
+
+  const prevKit = await KitModel.findOne({ _id: { $lt: kitId } })
+    .sort({ _id: -1 })
+    .limit(1);
+
+  const nextKit = await KitModel.findOne({ _id: { $gt: kitId } })
+    .sort({ _id: 1 })
+    .limit(1);
+
+  return {
+    kit,
+    prevKit,
+    nextKit,
+  };
 });
 
 const getKitSounds = handleRequest(async (req) => {
@@ -48,38 +59,37 @@ const getKitSounds = handleRequest(async (req) => {
   if (!sounds) throw new ExpressError('No sounds found for this kit', 404);
 
   sounds.sort((a, b) => a.updatedAt - b.updatedAt);
+
   return sounds;
 });
 
 const updateKitSounds = handleRequest(async (req) => {
-  const { kitId, pageId } = req.params;
+  const { kitId } = req.params;
   if (!kitId) throw new ExpressError('Kit ID not found', 404);
-  console.log('kitId: ', kitId);
 
   const kit = await KitModel.findById(kitId);
   if (!kit) throw new ExpressError('Kit not found', 404);
-  console.log('kit: ', kit);
 
   const { sounds } = req.body;
   if (!sounds || !Array.isArray(sounds)) {
     throw new ExpressError('Invalid request body', 400);
   }
+  console.log('kit.sounds: ', kit.sounds);
+  if (kit.sounds) kit.sounds = [];
 
-  const soundIds = sounds.map((sound) => sound._id);
+  const updatedSounds = await SoundModel.find({ _id: { $in: sounds } }).select('_id');
+  const updatedSoundIds = updatedSounds.map((sound) => sound._id);
+  console.log('updatedSoundIds: ', updatedSoundIds);
+
   // Update the sounds for the kit
-  kit.sounds = soundIds;
+  kit.sounds = updatedSoundIds;
 
-  const updatedKit = await kit.save().catch((err) => {
+  await kit.save().catch((err) => {
     console.error(err);
     throw new ExpressError('Failed to save changes to kit', 500);
   });
-  console.log('updatedKit: ', updatedKit);
-  // Invalidate the cache for the kit using its name
-  invalidateKitCache(kitId);
-  // Update the cache with the new data
-  await getAndCachePageDataFromDb(kitId, (forceUpdate = true));
 
-  return updatedKit;
+  return kit.sounds;
 });
 
 const updateKitById = handleRequest(async (req) => {

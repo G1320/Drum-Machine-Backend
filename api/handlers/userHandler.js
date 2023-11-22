@@ -39,7 +39,7 @@ const addKitToUser = handleRequest(async (req) => {
   user.kits.push(kit._id);
   await user.save();
 
-  return user;
+  return kit;
 });
 
 const removeKitFromUser = handleRequest(async (req) => {
@@ -58,7 +58,7 @@ const removeKitFromUser = handleRequest(async (req) => {
   user.kits.pull(kit._id);
   await user.save();
 
-  return user;
+  return kit;
 });
 
 const getAllUsers = handleRequest(async () => {
