@@ -1,6 +1,8 @@
 const { PORT, ALLOWED_ORIGINS, JWT_SECRET_KEY } = require('./config/config');
 const express = require('express');
 const path = require('path');
+const mime = require('mime');
+
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoSanitize = require('express-mongo-sanitize');
@@ -40,8 +42,21 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(
+  express.static(path.join(__dirname, '../Frontend/dist/assets'), {
+    setHeaders: (res, filePath) => {
+      const mimeType = mime.getType(filePath);
+      if (mimeType === 'text/css') {
+        res.setHeader('Content-Type', 'text/css');
+      } else if (mimeType === 'application/javascript') {
+        res.setHeader('Content-Type', 'application/javascript');
+      }
+    },
+  })
+);
+
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../Frontend')));
+app.use(express.static(path.join(__dirname, '../Frontend/dist/assets')));
 app.use('/views', express.static(path.join(__dirname, './views')));
 
 app.use('/api/users', userRoutes);
