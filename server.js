@@ -41,7 +41,7 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../Frontend/dist/assets')));
+app.use(express.static(path.join(__dirname, '../Frontend')));
 app.use('/views', express.static(path.join(__dirname, './views')));
 
 app.use('/api/users', userRoutes);
