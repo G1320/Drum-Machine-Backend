@@ -41,8 +41,8 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../Frontend/dist')));
-app.use('/views', express.static(path.join(__dirname, './views')));
+app.use(express.static(path.join(__dirname, '../Frontend/dist/assets')));
+app.use('/views', express.static(path.join(__dirname, '../Frontend/dist/assets')));
 
 app.use('/api/users', userRoutes);
 app.use('/api/kits', kitRoutes);
