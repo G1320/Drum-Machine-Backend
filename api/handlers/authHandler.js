@@ -7,6 +7,7 @@ const createAndRegisterUser = handleRequest(async (req, res) => {
   try {
     const user = new UserModel(req.body);
     await user.save();
+
     const accessToken = jwt.sign({ _id: user._id }, process.env.JWT_SECRET_KEY, {
       expiresIn: '15m',
     });

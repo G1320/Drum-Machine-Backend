@@ -7,7 +7,7 @@ const connectToDb = async () => {
       console.log('Already connected to the database');
       return;
     } //'mongodb://127.0.0.1:27017/appdb'
-    await mongoose.connect(DB_URL, {
+    await mongoose.connect('mongodb://127.0.0.1:27017/appdb', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

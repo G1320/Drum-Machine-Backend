@@ -28,20 +28,20 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
-        connectSrc: ["'self'", 'res.cloudinary.com'],
+        connectSrc: ["'self'", 'res.cloudinary.com/dngzwndvh'],
         workerSrc: ["'self'", 'blob:'],
+        mediaSrc: ["'self'", 'res.cloudinary.com/dngzwndvh'], // Add the URL of the media source here
       },
     },
   })
 );
-
 app.use((req, res, next) => {
   res.setHeader('Permissions-Policy', 'interest-cohort=()');
   next();
 });
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../Frontend/dist/assets')));
+app.use(express.static(path.join(__dirname, '../Frontend/dist')));
 app.use('/views', express.static(path.join(__dirname, './views')));
 
 app.use('/api/users', userRoutes);
