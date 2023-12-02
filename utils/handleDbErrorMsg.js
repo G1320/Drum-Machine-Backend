@@ -24,6 +24,7 @@ const handleDbErrorMsg = (error) => {
       } else {
         return `${errors[0].label} is ${errors[0].message}`;
       }
+    // mapping the error objects to a new format
 
     case 'DisconnectedError':
       console.error('Disconnected from database:', error);

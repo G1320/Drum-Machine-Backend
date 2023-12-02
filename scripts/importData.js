@@ -33,8 +33,8 @@ async function main() {
   try {
     await connectToDb();
     await importData(SoundModel, path.join(__dirname, '../data/sounds.json'), 'src');
-    // await importData(KitModel, path.join(__dirname, '../data/kits-export.json'), 'name');
-    // await importData(UserModel, path.join(__dirname, '../data/users.json'), 'username');
+    await importData(KitModel, path.join(__dirname, '../data/kits-export.json'), 'name');
+    await importData(UserModel, path.join(__dirname, '../data/users.json'), 'username');
   } catch (err) {
     console.error('Error:', err);
   } finally {

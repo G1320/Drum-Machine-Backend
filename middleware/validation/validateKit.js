@@ -23,10 +23,7 @@ const validateKit = (req, res, next) => {
   });
 
   const { error } = schema.validate(req.body);
-  if (error) {
-    handleJoiError(error);
-  }
-  next();
+  error ? handleJoiError(error) : next();
 };
 
 module.exports = validateKit;

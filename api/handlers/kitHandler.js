@@ -2,7 +2,7 @@ const { KitModel } = require('../../models/kitModel');
 const { SoundModel } = require('../../models/soundModel');
 const ExpressError = require('../../utils/expressError');
 const handleRequest = require('../../utils/requestHandler');
-const { invalidateKitCache, getAndCachePageDataFromDb } = require('../../services/dbService');
+const { invalidateCache, getAndCacheKitDataFromDb } = require('../../services/cacheService');
 
 const createKit = handleRequest(async (req) => {
   const kit = new KitModel(req.body);
@@ -102,9 +102,9 @@ const updateKitById = handleRequest(async (req) => {
     new: true,
   });
   // Invalidate the cache for the kit using its name
-  invalidateKitCache(kitId);
+  invalidateCache(kitId);
   // Update the cache with the new data
-  await getAndCachePageDataFromDb(kitId, (forceUpdate = true));
+  await getAndCacheKitDataFromDb(kitId, (forceUpdate = true));
   return updatedKit;
 });
 
@@ -115,7 +115,7 @@ const deleteKitById = handleRequest(async (req) => {
   if (!existingKit) throw new ExpressError('Kit not found', 404);
 
   await KitModel.findByIdAndDelete(kitId);
-  invalidateKitCache(kitId);
+  invalidateCache(kitId);
   return null;
 });
 

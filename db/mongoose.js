@@ -1,13 +1,17 @@
 const mongoose = require('mongoose');
-const { DB_URL } = require('../config/config');
+const { DB_URL, NODE_ENV } = require('../config/config');
 
 const connectToDb = async () => {
   try {
     if (mongoose.connection.readyState === 1) {
       console.log('Already connected to the database');
       return;
-    } //'mongodb://127.0.0.1:27017/appdb'
-    await mongoose.connect('mongodb://127.0.0.1:27017/appdb', {
+    }
+
+    const dbUrl = NODE_ENV === 'production' ? DB_URL : 'mongodb://127.0.0.1:27017/appdb';
+    console.log('dbUrl: ', dbUrl);
+
+    await mongoose.connect(dbUrl, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

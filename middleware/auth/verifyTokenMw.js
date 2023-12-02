@@ -1,3 +1,4 @@
+const { JWT_REFRESH_KEY, JWT_SECRET_KEY } = require('../../config/config');
 const jwt = require('jsonwebtoken');
 const ExpressError = require('../../utils/expressError');
 
@@ -6,7 +7,7 @@ function verifyTokenMw(req, res, next) {
 
   if (!token) throw new ExpressError('Access denied. No token provided.', 401);
   try {
-    const decoded = jwt.verify(token, process.env.JWT_REFRESH_KEY || process.env.JWT_SECRET_KEY);
+    const decoded = jwt.verify(token, JWT_REFRESH_KEY || JWT_SECRET_KEY);
     req.decodedJwt = decoded;
     next();
   } catch (error) {

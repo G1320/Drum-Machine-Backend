@@ -4,7 +4,7 @@ const validateKit = require('./validation/validateKit');
 const logRequestsMw = require('./logging/logRequestsMw');
 const handleDbErrorMw = require('./errorHandling/handleDbErrorMw');
 const handleErrorMw = require('./errorHandling/handleErrorMw');
-const verifyTokenMw = require('./authorization/verifyTokenMw');
+const verifyTokenMw = require('./auth/verifyTokenMw');
 
 module.exports = {
   validatePageName,
