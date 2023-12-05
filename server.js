@@ -44,9 +44,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.use(express.static(path.join(__dirname, './public/index.html')));
-// app.use('/assets', express.static(path.join(__dirname, './public/assets')));
-
 app.use('/views', express.static(path.join(__dirname, './views')));
 
 app.use('/api/users', userRoutes);
@@ -59,12 +56,6 @@ app.use(pageRoutes);
 app.use(logRequestsMw);
 app.use(handleDbErrorMw);
 app.use(handleErrorMw);
-
-// Catch-all requests return the React app, so it can handle further routing.
-app.get('/**', (req, res) => {
-  app.use(express.static(path.join(__dirname, 'public', 'index.html')));
-  app.use(express.static(path.join(__dirname, 'public', 'assets')));
-});
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
