@@ -1,4 +1,4 @@
-const { PORT, ALLOWED_ORIGINS, JWT_SECRET_KEY, NODE_ENV } = require('./config/config');
+const { PORT, ALLOWED_ORIGINS, JWT_SECRET_KEY, NODE_ENV } = require('./config/index.js');
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
@@ -44,8 +44,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.static(path.join(__dirname, './public')));
-app.use('/assets', express.static(path.join(__dirname, 'public/assets')));
+// app.use(express.static(path.join(__dirname, './public/index.html')));
+// app.use('/assets', express.static(path.join(__dirname, './public/assets')));
 
 app.use('/views', express.static(path.join(__dirname, './views')));
 
@@ -62,8 +62,8 @@ app.use(handleErrorMw);
 
 // Catch-all requests return the React app, so it can handle further routing.
 app.get('/**', (req, res) => {
-  app.use(express.static(path.join(__dirname, './public')));
-  app.use('/assets', express.static(path.join(__dirname, 'public/assets')));
+  app.use(express.static(path.join(__dirname, 'public', 'index.html')));
+  app.use(express.static(path.join(__dirname, 'public', 'assets')));
 });
 
 app.listen(PORT, () => {

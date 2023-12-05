@@ -1,4 +1,4 @@
-const { NODE_ENV, JWT_REFRESH_KEY, JWT_SECRET_KEY } = require('../../config/config');
+const { NODE_ENV, JWT_REFRESH_KEY, JWT_SECRET_KEY } = require('../../config');
 const { UserModel } = require('../../models/userModel');
 const handleRequest = require('../../utils/requestHandler');
 const ExpressError = require('../../utils/expressError');

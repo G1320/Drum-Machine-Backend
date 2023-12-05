@@ -1,4 +1,4 @@
-const { JWT_REFRESH_KEY, JWT_SECRET_KEY } = require('../../config/config');
+const { JWT_REFRESH_KEY, JWT_SECRET_KEY } = require('../../config');
 const jwt = require('jsonwebtoken');
 const ExpressError = require('../../utils/expressError');
 
