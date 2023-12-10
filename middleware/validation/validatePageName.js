@@ -6,7 +6,6 @@ const validatePageName = (req, res, next) => {
     pageName: Joi.string().alphanum().min(2).max(30).required().label('The requested page name'),
   });
   const { error } = schema.validate(req.params);
-  
   error ? handleJoiError(error) : next();
 };
 

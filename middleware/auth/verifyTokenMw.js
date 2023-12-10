@@ -11,6 +11,7 @@ function verifyTokenMw(req, res, next) {
     req.decodedJwt = decoded;
     next();
   } catch (error) {
+    console.error(error);
     throw new ExpressError('invalid token', 400);
   }
 }

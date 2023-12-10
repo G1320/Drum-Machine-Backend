@@ -15,7 +15,6 @@ const validateUser = (req, res, next) => {
   });
 
   const { error } = schema.validate(req.body);
-
   error ? handleJoiError(error) : next();
 };
 
