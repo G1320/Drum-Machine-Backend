@@ -30,12 +30,10 @@ app.use(
   helmet({
     contentSecurityPolicy: {
       directives: {
-        defaultSrc: ["'self'"],
+        defaultSrc: ["'self'", ...ALLOWED_ORIGINS],
         connectSrc: ["'self'", ...ALLOWED_ORIGINS],
         workerSrc: ["'self'", 'blob:'],
         mediaSrc: ["'self'", ...ALLOWED_ORIGINS],
-        // styleSec: ["'unsafe-inline'"],
-        // styleSrc: ["'self'", "'unsafe-inline'"], // Add 'unsafe-inline' to allow inline styles
       },
     },
   })
@@ -61,17 +59,9 @@ app.use(handleDbErrorMw);
 app.use(handleErrorMw);
 
 app.use(express.static('public'));
-app.use(
-  express.static('public', {
-    setHeaders: (res, path) => {
-      if (path.endsWith('.css')) {
-        res.setHeader('Content-Type', 'text/css');
-      } else if (path.endsWith('.js')) {
-        res.setHeader('Content-Type', 'text/javascript');
-      }
-    },
-  })
-);
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
+});
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
