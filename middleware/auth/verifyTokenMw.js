@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const ExpressError = require('../../utils/expressError');
 
 function verifyTokenMw(req, res, next) {
-  const token = req.signedCookies.refreshToken || req.signedCookies.authToken;
+  const token = req.signedCookies.accessToken || req.signedCookies.refreshToken;
 
   if (!token) throw new ExpressError('Access denied. No token provided.', 401);
   try {
