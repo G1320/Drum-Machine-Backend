@@ -1,18 +1,21 @@
-const { JWT_REFRESH_KEY, JWT_SECRET_KEY } = require('../../config');
+const { JWT_SECRET_KEY } = require('../../config');
 const jwt = require('jsonwebtoken');
-const ExpressError = require('../../utils/expressError');
 
 function verifyTokenMw(req, res, next) {
-  const token = req.signedCookies.accessToken || req.signedCookies.refreshToken;
+  const token = req.signedCookies.accessToken;
 
-  if (!token) throw new ExpressError('Access denied. No token provided.', 401);
+  if (!token) return res.status(401).json({ message: 'Access denied. No token provided.' });
+
   try {
-    const decoded = jwt.verify(token, JWT_REFRESH_KEY || JWT_SECRET_KEY);
+    const decoded = jwt.verify(token, JWT_SECRET_KEY);
     req.decodedJwt = decoded;
     next();
   } catch (error) {
-    console.error(error);
-    throw new ExpressError('invalid token', 400);
+    if (error instanceof jwt.TokenExpiredError) {
+      return res.status(401).json({ message: 'Token expired' });
+    } else {
+      return res.status(400).json({ message: 'Invalid access token' });
+    }
   }
 }
 

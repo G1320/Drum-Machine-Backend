@@ -35,7 +35,6 @@ const createAndRegisterUser = handleRequest(async (req, res) => {
 });
 
 const loginUser = handleRequest(async (req, res) => {
-  console.log('req: ', req);
   try {
     const userCred = await UserModel.findOne({ username: req.body.username }).select('password');
     if (!userCred) throw new ExpressError('Invalid username', 400);
@@ -75,12 +74,16 @@ const refreshAccessToken = handleRequest(async (req, res) => {
 
     const decoded = jwt.verify(refreshToken, JWT_REFRESH_KEY);
     const accessToken = jwt.sign({ _id: decoded._id }, JWT_SECRET_KEY, { expiresIn: '15m' });
+
+    res.clearCookie('accessToken');
     res.cookie('accessToken', accessToken, {
       httpOnly: true,
       signed: true,
       secure: NODE_ENV === 'production',
       maxAge: 36000000,
     });
+    console.log('Generated new access token');
+
     return { accessToken: accessToken };
   } catch (error) {
     console.error('Error refreshing access token:', error);
