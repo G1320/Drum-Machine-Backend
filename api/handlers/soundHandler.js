@@ -52,7 +52,7 @@ const addSoundToKit = handleRequest(async (req) => {
   kit.sounds.push(sound._id);
   await kit.save();
 
-  return kit;
+  return sound;
 });
 
 const removeSoundFromKit = handleRequest(async (req) => {
@@ -71,7 +71,7 @@ const removeSoundFromKit = handleRequest(async (req) => {
   kit.sounds.pull(sound._id);
   await kit.save();
 
-  return kit;
+  return sound;
 });
 
 const getSoundById = handleRequest(async (req) => {
