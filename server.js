@@ -1,4 +1,4 @@
-const { PORT, ALLOWED_ORIGINS, JWT_SECRET_KEY, NODE_ENV } = require('./config/index.js');
+const { PORT, ALLOWED_ORIGINS, JWT_SECRET_KEY } = require('./config/index.js');
 const express = require('express');
 const path = require('path');
 const cors = require('cors');

@@ -64,6 +64,7 @@ const removeKitFromUser = handleRequest(async (req) => {
 const getAllUsers = handleRequest(async () => {
   const users = await UserModel.find({});
   if (!users) throw new ExpressError('No users found', 404);
+
   return users;
 });
 
@@ -78,7 +79,7 @@ const deleteUser = handleRequest(async (req) => {
   const user = await UserModel.findByIdAndDelete(req.params.id);
   if (!user) throw new ExpressError('User not found', 404);
 
-  // Using the "null" return to signify a 204 No Content response
+  // Using the "null" return to signal a 204 No Content response
   return null;
 });
 

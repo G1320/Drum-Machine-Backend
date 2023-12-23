@@ -6,16 +6,6 @@ const connectToDb = require('../db/mongoose');
 const fs = require('fs');
 const path = require('path');
 
-async function exportDocument(model, filePath) {
-  const data = await model.find({});
-  if (!data || data.length === 0) {
-    console.log(`No documents found for export in model: ${model.modelName}`);
-    return;
-  }
-  fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-  console.log(`Exported ${data.length} documents to ${filePath}`);
-}
-
 async function main() {
   try {
     await connectToDb();
@@ -28,6 +18,16 @@ async function main() {
   } finally {
     mongoose.connection.close();
   }
+}
+
+async function exportDocument(model, filePath) {
+  const data = await model.find({});
+  if (!data || data.length === 0) {
+    console.log(`No documents found for export in model: ${model.modelName}`);
+    return;
+  }
+  fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+  console.log(`Exported ${data.length} documents to ${filePath}`);
 }
 
 main().catch(console.error);

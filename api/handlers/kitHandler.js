@@ -71,15 +71,12 @@ const updateKitSounds = handleRequest(async (req) => {
   if (!kit) throw new ExpressError('Kit not found', 404);
 
   const { sounds } = req.body;
-  if (!sounds || !Array.isArray(sounds)) {
-    throw new ExpressError('Invalid request body', 400);
-  }
-  console.log('kit.sounds: ', kit.sounds);
+  if (!sounds || !Array.isArray(sounds)) throw new ExpressError('Invalid request body', 400);
+
   if (kit.sounds) kit.sounds = [];
 
   const updatedSounds = await SoundModel.find({ _id: { $in: sounds } }).select('_id');
   const updatedSoundIds = updatedSounds.map((sound) => sound._id);
-  console.log('updatedSoundIds: ', updatedSoundIds);
 
   // Update the sounds for the kit
   kit.sounds = updatedSoundIds;

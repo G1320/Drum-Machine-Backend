@@ -11,6 +11,7 @@ const handleDbErrorMsg = (error) => {
     case 'ValidationError':
       console.error('Validation Error:', error);
 
+      // mapping the error objects to a new more readable format
       const errors = Object.values(error.errors).map((e) => {
         const label = validationLabels[e.path] || capitalizeFirstLetter(e.path);
         let message = e.message.replace(`Path \`${e.path}\` is `, '');
@@ -24,7 +25,6 @@ const handleDbErrorMsg = (error) => {
       } else {
         return `${errors[0].label} is ${errors[0].message}`;
       }
-    // mapping the error objects to a new format
 
     case 'DisconnectedError':
       console.error('Disconnected from database:', error);

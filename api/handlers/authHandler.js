@@ -75,7 +75,6 @@ const refreshAccessToken = handleRequest(async (req, res) => {
     const decoded = jwt.verify(refreshToken, JWT_REFRESH_KEY);
     const accessToken = jwt.sign({ _id: decoded._id }, JWT_SECRET_KEY, { expiresIn: '15m' });
 
-    res.clearCookie('accessToken');
     res.cookie('accessToken', accessToken, {
       httpOnly: true,
       signed: true,
@@ -97,7 +96,7 @@ const logoutUser = handleRequest(async (req, res) => {
     res.clearCookie('refreshToken');
     return { message: 'Logged out successfully' };
   } catch (error) {
-    console.error('Failed to clear authentication cookie:', error);
+    console.error('Failed to clear authentication cookies:', error);
     throw new ExpressError('Logout failed', 500);
   }
 });
