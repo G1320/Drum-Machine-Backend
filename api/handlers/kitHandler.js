@@ -1,12 +1,25 @@
 const { KitModel } = require('../../models/kitModel');
 const { SoundModel } = require('../../models/soundModel');
+const { UserModel } = require('../../models/userModel');
 const ExpressError = require('../../utils/expressError');
 const handleRequest = require('../../utils/requestHandler');
-const { invalidateCache, getAndCacheKitDataFromDb } = require('../../services/cacheService');
+const { invalidateCache, getFromDbAndCache } = require('../../services/cacheService');
 
 const createKit = handleRequest(async (req) => {
+  const { userId } = req.params;
+  if (!userId) throw new ExpressError('User ID not provided', 400);
   const kit = new KitModel(req.body);
+  kit.createdBy = userId;
   await kit.save();
+
+  // Add the created kit to the user's kits array
+  const user = await UserModel.findById(userId);
+  if (!user) throw new ExpressError('User not found', 404);
+  if (!user.kits) user.kits = [];
+
+  user.kits.push(kit._id);
+  await user.save();
+
   return kit;
 });
 
@@ -101,7 +114,7 @@ const updateKitById = handleRequest(async (req) => {
   // Invalidate the cache for the kit using its name
   invalidateCache(kitId);
   // Update the cache with the new data
-  await getAndCacheKitDataFromDb(kitId, (forceUpdate = true));
+  await getFromDbAndCache(kitId, (forceUpdate = true));
   return updatedKit;
 });
 

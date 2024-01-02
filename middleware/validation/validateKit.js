@@ -15,10 +15,11 @@ const validateKit = (req, res, next) => {
 
   const schema = Joi.object({
     _id: Joi.string().optional(),
-    name: Joi.string().alphanum().min(2).max(10).required().label('Kit name'),
+    name: Joi.string().alphanum().min(2).max(20).required().label('Kit name'),
     subscribers: Joi.number().optional().label('Number of subscribers'),
     description: Joi.string().required().label('Kit description'),
     sounds: Joi.array().items(soundSchema).optional().label('Sounds array'),
+    isCustom: Joi.boolean().optional(),
     __v: Joi.number().optional(),
   });
 

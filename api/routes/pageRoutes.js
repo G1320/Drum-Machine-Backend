@@ -5,7 +5,7 @@ const { getPageDataByName, serveFrontend, getPageDataById } = require('../handle
 const handleRequest = require('../../utils/requestHandler');
 
 router.get('/api/pageData/:pageName', validatePageName, handleRequest(getPageDataByName));
-router.get('/pages/id/:pageId', serveFrontend);
-router.get('/api/pageData/id/:pageId', handleRequest(getPageDataById));
+router.get('/pages/id/:kitId', serveFrontend);
+router.get('/api/pageData/id/:kitId', handleRequest(getPageDataById));
 
 module.exports = router;

@@ -8,9 +8,9 @@ const connectToDb = async () => {
       return;
     }
 
-    const dbUrl = NODE_ENV === 'production' ? DB_URL : 'mongodb://127.0.0.1:27017/appdb';
+    // const dbUrl = NODE_ENV === 'development' ? DB_URL : 'mongodb://127.0.0.1:27017/appdb';
 
-    await mongoose.connect(dbUrl, {
+    await mongoose.connect(DB_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

@@ -1,10 +1,10 @@
 const { KitModel } = require('../models/kitModel');
 const { Types } = require('mongoose');
-const cache = new Map(); // A simple in-memory cache
+const cache = new Map();
 
-const getAndCacheKitDataFromDb = async (identifier, forceUpdate = false) => {
+const getFromDbAndCache = async (identifier, forceUpdate = false) => {
   if (!forceUpdate) {
-    // First check if the data is in the cache
+    // Check if the data is in the cache
     const cachedData = cache.get(identifier);
     if (cachedData) return cachedData;
   }
@@ -28,6 +28,6 @@ const getAndCacheKitDataFromDb = async (identifier, forceUpdate = false) => {
 const invalidateCache = (identifier) => cache.delete(identifier);
 
 module.exports = {
-  getAndCacheKitDataFromDb,
+  getFromDbAndCache,
   invalidateCache,
 };
