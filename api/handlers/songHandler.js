@@ -19,7 +19,7 @@ const createAndAddSongToUser = handleRequest(async (req) => {
   );
 
   if (existingSong) throw new ExpressError('A song with the same pattern and kit already exists', 400);
-  if (user.songs.length >= 8) throw new ExpressError('Maximum number of songs reached!', 400);
+  if (user.songs.length >= 4) throw new ExpressError('Maximum number of songs reached!', 400);
 
   const song = new SongModel({ name, pattern, kit: kitId, createdBy: userId });
   await song.save();
