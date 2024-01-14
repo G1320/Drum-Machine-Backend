@@ -11,6 +11,8 @@ const userSchema = new mongoose.Schema(
     password: { type: String, select: false },
     isAdmin: { type: Boolean, default: false },
     kits: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Kit' }],
+    songs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Song' }], // Array of song references
+
   },
   { timestamps: true }
 );

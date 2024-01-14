@@ -13,6 +13,8 @@ const searchRoutes = require('./api/routes/searchRoutes');
 const pageRoutes = require('./api/routes/pageRoutes');
 const authRoutes = require('./api/routes/authRoutes');
 const soundRoutes = require('./api/routes/soundRoutes');
+const songRoutes = require('./api/routes/songRoutes');
+
 
 const { handleErrorMw, handleDbErrorMw, logRequestsMw } = require('./middleware');
 
@@ -49,6 +51,8 @@ app.use('/views', express.static(path.join(__dirname, './views')));
 app.use('/api/users', userRoutes);
 app.use('/api/kits', kitRoutes);
 app.use('/api/sounds', soundRoutes);
+app.use('/api/songs', songRoutes);
+
 app.use('/api/auth', authRoutes);
 app.use(searchRoutes);
 app.use(pageRoutes);

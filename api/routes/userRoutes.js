@@ -12,4 +12,5 @@ router.delete('/:id', userHandler.deleteUser);
 
 router.post('/:id/add-kit/:kitId', verifyTokenMw, userHandler.addKitToUser);
 router.post('/:id/remove-kit/:kitId', verifyTokenMw, userHandler.removeKitFromUser);
+
 module.exports = router;
