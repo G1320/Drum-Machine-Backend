@@ -15,7 +15,6 @@ const authRoutes = require('./api/routes/authRoutes');
 const soundRoutes = require('./api/routes/soundRoutes');
 const songRoutes = require('./api/routes/songRoutes');
 
-
 const { handleErrorMw, handleDbErrorMw, logRequestsMw } = require('./middleware');
 
 connectToDb();
@@ -33,6 +32,7 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'", ...ALLOWED_ORIGINS],
+        scriptSrc: ["'self'", "'unsafe-eval'", ...ALLOWED_ORIGINS],
         connectSrc: ["'self'", ...ALLOWED_ORIGINS],
         workerSrc: ["'self'", 'blob:'],
         mediaSrc: ["'self'", ...ALLOWED_ORIGINS],
