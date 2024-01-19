@@ -1,5 +1,6 @@
 const { SoundModel } = require('../../models/soundModel');
 const { KitModel } = require('../../models/kitModel');
+const { SilenceModel } = require('../../models/silenceModel');
 const ExpressError = require('../../utils/expressError');
 const handleRequest = require('../../utils/requestHandler');
 
@@ -8,6 +9,12 @@ const createSound = handleRequest(async (req) => {
 
   await sound.save();
   return sound;
+});
+
+const getSilence = handleRequest(async (req) => {
+  const silence = await SilenceModel.find({});
+  if (!silence) throw new ExpressError('Silence file not found', 404);
+  return silence;
 });
 
 const getSounds = handleRequest(async (req) => {
@@ -107,6 +114,7 @@ const deleteSoundById = handleRequest(async (req) => {
 module.exports = {
   createSound,
   getSounds,
+  getSilence,
   getSoundById,
   addSoundToKit,
   removeSoundFromKit,

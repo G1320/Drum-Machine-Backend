@@ -5,6 +5,7 @@ const soundHandler = require('../handlers/soundHandler');
 // Sound routes
 router.post('/', soundHandler.createSound);
 router.get('/', soundHandler.getSounds);
+router.get('/silence', soundHandler.getSilence);
 router.get('/:soundId', soundHandler.getSoundById);
 router.put('/:soundId', soundHandler.updateSoundById);
 router.delete('/:soundId', soundHandler.deleteSoundById);
