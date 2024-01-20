@@ -6,7 +6,7 @@ const ExpressError = require('../../utils/expressError');
 const { arraysEqual } = require('../../utils/compareArrays');
 
 const createAndAddSongToUser = handleRequest(async (req) => {
-  const { userId, name, pattern, kitId, tempo } = req.body;
+  const { userId, name, pattern, kitId, tempo, volume, selectedCells, mutedTracks } = req.body;
   const user = await UserModel.findById(userId).populate('songs');
   if (!user) throw new ExpressError('User not found', 404);
 
@@ -21,7 +21,16 @@ const createAndAddSongToUser = handleRequest(async (req) => {
   if (existingSong) throw new ExpressError('No changes were made, please try again', 400);
   if (user.songs.length >= 4) throw new ExpressError('Maximum number of songs reached!', 400);
 
-  const song = new SongModel({ name, pattern, tempo, kit: kitId, createdBy: userId });
+  const song = new SongModel({
+    name,
+    pattern,
+    tempo,
+    volume,
+    selectedCells,
+    mutedTracks,
+    kit: kitId,
+    createdBy: userId,
+  });
   await song.save();
 
   user.songs.push(song._id);
