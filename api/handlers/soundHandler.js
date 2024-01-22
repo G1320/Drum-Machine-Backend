@@ -53,7 +53,7 @@ const addSoundToKit = handleRequest(async (req) => {
   if (!sound.idx) sound.idx = kit.sounds.length;
   await sound.save();
 
-  if (kit.sounds.length > 31) throw new ExpressError('Sorry, Kit is already full!', 400);
+  if (kit.sounds.length > 31) throw new ExpressError('Oops, Kit is full!', 400);
   if (kit.sounds.includes(sound._id)) throw new ExpressError('Kit already includes this sound!', 400);
 
   kit.sounds.push(sound._id);

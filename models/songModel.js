@@ -10,6 +10,7 @@ const songSchema = new mongoose.Schema(
     volume: { type: Number, default: 1 },
     selectedCells: { type: Array, default: [] },
     mutedTracks: { type: Array, default: [] },
+    numOfSteps: { type: Number, default: 16 },
   },
   { timestamps: true }
 );
