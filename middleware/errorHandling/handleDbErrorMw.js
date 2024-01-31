@@ -1,16 +1,3 @@
-// const ExpressError = require('../../utils/expressError');
-// const { handleDbErrorMsg } = require('../../utils/handleDbErrorMsg');
-
-// const handleDbErrorMw = (err, req, res, next) => {
-//   if (['CastError', 'ValidationError', 'DisconnectedError', 'MongoError'].includes(err.name)) {
-//     err = new ExpressError(handleDbErrorMsg(err), 400);
-//   }
-//   console.error(err.stack);
-//   next(err);
-// };
-
-// module.exports = handleDbErrorMw;
-
 const ExpressError = require('../../utils/expressError');
 const { handleDbErrorMsg } = require('../../utils/handleDbErrorMsg');
 
@@ -22,7 +9,10 @@ const handleDbErrorMw = (err, req, res, next) => {
     err = new ExpressError(handleDbErrorMsg(err), 400);
   }
   console.error(err.stack);
-  next(err);
+  res.status(err.statusCode || 500).send({
+    error: 'Oops! An error occurred while processing your request. Please try again later.',
+  });
+  next();
 };
 
 module.exports = handleDbErrorMw;
