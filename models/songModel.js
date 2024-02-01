@@ -8,7 +8,7 @@ const songSchema = new mongoose.Schema(
     createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     tempo: { type: Number, default: 120 },
     volume: { type: Number, default: 1 },
-    selectedCells: { type: Array, default: [] },
+    pattern: { type: Array, default: [] },
     mutedTracks: { type: Array, default: [] },
     numOfSteps: { type: Number, default: 16 },
   },

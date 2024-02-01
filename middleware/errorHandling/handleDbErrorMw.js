@@ -9,10 +9,7 @@ const handleDbErrorMw = (err, req, res, next) => {
     err = new ExpressError(handleDbErrorMsg(err), 400);
   }
   console.error(err.stack);
-  res.status(err.statusCode || 500).send({
-    error: 'Oops! An error occurred while processing your request. Please try again later.',
-  });
-  next();
+  next(err);
 };
 
 module.exports = handleDbErrorMw;
