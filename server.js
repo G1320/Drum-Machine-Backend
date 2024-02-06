@@ -31,7 +31,7 @@ app.use(
   helmet({
     contentSecurityPolicy: {
       directives: {
-        imgSrc: ["'self'", 'https://c.clarity.ms/'],
+        imgSrc: ["'self'", 'https://c.clarity.ms/', 'https://c.bing.com/c.gif'],
         defaultSrc: ["'self'", ...ALLOWED_ORIGINS],
         scriptSrc: ["'self'", "'unsafe-eval'", ...ALLOWED_ORIGINS],
         connectSrc: ["'self'", ...ALLOWED_ORIGINS],
