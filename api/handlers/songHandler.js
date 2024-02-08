@@ -6,7 +6,9 @@ const ExpressError = require('../../utils/expressError');
 const { arraysEqual } = require('../../utils/compareArrays');
 
 const createAndAddSongToUser = handleRequest(async (req) => {
-  const { userId, name, pattern, kitId, tempo, volume, mutedTracks, numOfSteps } = req.body;
+  const { userId, name, pattern, kitId, tempo, volume, reverb, delay, mutedTracks, numOfSteps } =
+    req.body;
+
   const user = await UserModel.findById(userId).populate('songs');
   if (!user) throw new ExpressError('User not found', 404);
 
@@ -26,6 +28,8 @@ const createAndAddSongToUser = handleRequest(async (req) => {
     pattern,
     tempo,
     volume,
+    reverb,
+    delay,
     mutedTracks,
     numOfSteps,
     kit: kitId,
