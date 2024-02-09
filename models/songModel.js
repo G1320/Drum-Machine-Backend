@@ -13,6 +13,7 @@ const songSchema = new mongoose.Schema(
     numOfSteps: { type: Number, default: 16 },
     reverb: { type: Number, default: 0 },
     delay: { type: Number, default: 0 },
+    swing: { type: Number, default: 0 },
   },
   { timestamps: true }
 );
