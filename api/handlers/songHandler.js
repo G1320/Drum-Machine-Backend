@@ -16,11 +16,9 @@ const createAndAddSongToUser = handleRequest(async (req) => {
   if (!kit) throw new ExpressError('Kit not found', 404);
 
   // Check for existing song with same pattern and kit
-  const existingSong = user.songs.find(
-    (song) => song.kit.toString() === kitId && arraysEqual(song.pattern, pattern)
-  );
-
-  if (existingSong) throw new ExpressError('No changes were made, please try again', 400);
+  if (user.songs.some((song) => song.kit.toString() === kitId && arraysEqual(song.pattern, pattern))) {
+    throw new ExpressError('No changes were made, please try again', 400);
+  }
   if (user.songs.length >= 4) throw new ExpressError('Maximum number of songs reached!', 400);
 
   const song = new SongModel({
@@ -36,8 +34,8 @@ const createAndAddSongToUser = handleRequest(async (req) => {
     kit: kitId,
     createdBy: userId,
   });
-  await song.save();
 
+  await song.save();
   user.songs.push(song._id);
   await user.save();
 

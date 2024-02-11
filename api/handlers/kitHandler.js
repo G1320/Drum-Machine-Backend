@@ -12,7 +12,7 @@ const createKit = handleRequest(async (req) => {
   kit.createdBy = userId;
 
   // Add the first sound from the sounds collection to the kit
-  const sound = await SoundModel.findOne(); 
+  const sound = await SoundModel.findOne();
   if (!sound) throw new ExpressError('No sounds found', 404);
   kit.sounds.push(sound._id);
 
