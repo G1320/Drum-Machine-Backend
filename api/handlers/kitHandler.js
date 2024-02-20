@@ -24,8 +24,6 @@ const createKit = handleRequest(async (req) => {
   if (!user.kits) user.kits = [];
 
   user.kits.push(kit._id);
-  // kit.sounds.push({ idx: kit.sounds.length, soundId: sound._id });
-  // console.log('kit.sounds: ', kit.sounds);
 
   await user.save();
 
@@ -79,13 +77,21 @@ const getKitSounds = handleRequest(async (req) => {
 
   // Sort the sounds in the kit based on the idx field
   const sortedSounds = kit.sounds.sort((a, b) => a.idx - b.idx);
+  console.log('sortedSounds: ', sortedSounds);
 
   // Extract soundIds from the sorted kit.sounds
   const soundIds = sortedSounds.map((sound) => sound.soundId);
+  console.log('soundIds: ', soundIds);
 
   // Retrieve sounds from SoundModel based on the sorted soundIds
-  const sounds = await SoundModel.find({ _id: { $in: soundIds } });
+  const sounds = await SoundModel.aggregate([
+    { $match: { _id: { $in: soundIds } } },
+    { $addFields: { __order: { $indexOfArray: [soundIds, '$_id'] } } },
+    { $sort: { __order: 1 } },
+    { $project: { __order: 0 } },
+  ]);
   if (!sounds) throw new ExpressError('No sounds found for this kit', 404);
+  console.log('sounds: ', sounds);
 
   return sounds;
 });

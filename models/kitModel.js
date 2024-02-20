@@ -4,7 +4,6 @@ const kitSchema = new mongoose.Schema({
   name: { type: String, required: true },
   subscribers: { type: Number, required: true },
   description: { type: String, required: true },
-  // sounds: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Sound' }],
   sounds: [
     {
       idx: { type: Number, required: true },
