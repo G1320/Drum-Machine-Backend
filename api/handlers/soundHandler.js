@@ -51,14 +51,12 @@ const addSoundToKit = handleRequest(async (req) => {
   sound.updatedAt = new Date();
 
   await sound.save();
-  console.log('sound: ', sound);
 
   if (kit.sounds.length > 31) throw new ExpressError('Oops, Kit is full!', 400);
   if (kit.sounds.includes(sound._id)) throw new ExpressError('Kit already includes this sound!', 400);
 
   kit.sounds.push({ idx: kit.sounds.length, soundId: sound._id });
   await kit.save();
-  console.log('kit.sounds: ', kit.sounds);
 
   return sound;
 });

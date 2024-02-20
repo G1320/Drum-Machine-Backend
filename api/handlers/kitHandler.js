@@ -77,11 +77,9 @@ const getKitSounds = handleRequest(async (req) => {
 
   // Sort the sounds in the kit based on the idx field
   const sortedSounds = kit.sounds.sort((a, b) => a.idx - b.idx);
-  console.log('sortedSounds: ', sortedSounds);
 
   // Extract soundIds from the sorted kit.sounds
   const soundIds = sortedSounds.map((sound) => sound.soundId);
-  console.log('soundIds: ', soundIds);
 
   // Retrieve sounds from SoundModel based on the sorted soundIds
   const sounds = await SoundModel.aggregate([
@@ -91,7 +89,6 @@ const getKitSounds = handleRequest(async (req) => {
     { $project: { __order: 0 } },
   ]);
   if (!sounds) throw new ExpressError('No sounds found for this kit', 404);
-  console.log('sounds: ', sounds);
 
   return sounds;
 });
