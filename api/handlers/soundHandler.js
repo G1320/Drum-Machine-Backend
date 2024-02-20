@@ -56,7 +56,6 @@ const addSoundToKit = handleRequest(async (req) => {
   if (kit.sounds.length > 31) throw new ExpressError('Oops, Kit is full!', 400);
   if (kit.sounds.includes(sound._id)) throw new ExpressError('Kit already includes this sound!', 400);
 
-  // kit.sounds.push(sound._id);
   kit.sounds.push({ idx: kit.sounds.length + 1, soundId: sound._id });
   await kit.save();
   console.log('kit.sounds: ', kit.sounds);
@@ -92,32 +91,6 @@ const removeSoundFromKit = handleRequest(async (req) => {
 
   return soundIdToRemove; // Return the removed soundId
 });
-
-// const removeSoundFromKit = handleRequest(async (req) => {
-//   const kitId = req.params.id;
-//   if (!kitId) throw new ExpressError('Kit ID not provided', 400);
-
-//   const soundIdToRemove = req.params.soundId;
-//   if (!soundIdToRemove) throw new ExpressError('Sound ID not provided', 400);
-
-//   const kit = await KitModel.findById(kitId);
-//   if (!kit) throw new ExpressError('Kit not found', 404);
-
-//   // Find the index of the sound with the specified soundId in kit.sounds
-//   const soundIndex = kit.sounds.findIndex((sound) => sound.soundId.equals(soundIdToRemove));
-
-//   if (soundIndex === -1) {
-//     throw new ExpressError('Sound not found in the kit', 404);
-//   }
-
-//   // Remove the sound at the found index
-//   kit.sounds.splice(soundIndex, 1);
-
-//   // Save the kit
-//   await kit.save();
-
-//   return soundIdToRemove; // Return the removed soundId
-// });
 
 const getSoundById = handleRequest(async (req) => {
   const { soundId } = req.params;
