@@ -14,7 +14,7 @@ const createKit = handleRequest(async (req) => {
   // Add the first sound from the sounds collection to the kit
   const sound = await SoundModel.findOne();
   if (!sound) throw new ExpressError('No sounds found', 404);
-  kit.sounds.push(sound._id);
+  kit.sounds.push({ idx: kit.sounds.length, soundId: sound._id });
 
   await kit.save();
 
@@ -24,6 +24,9 @@ const createKit = handleRequest(async (req) => {
   if (!user.kits) user.kits = [];
 
   user.kits.push(kit._id);
+  // kit.sounds.push({ idx: kit.sounds.length, soundId: sound._id });
+  // console.log('kit.sounds: ', kit.sounds);
+
   await user.save();
 
   return kit;
@@ -74,10 +77,15 @@ const getKitSounds = handleRequest(async (req) => {
   const kit = await KitModel.findById(kitId);
   if (!kit) throw new ExpressError('Kit not found', 404);
 
-  const sounds = await SoundModel.find({ _id: { $in: kit.sounds } });
-  if (!sounds) throw new ExpressError('No sounds found for this kit', 404);
+  // Sort the sounds in the kit based on the idx field
+  const sortedSounds = kit.sounds.sort((a, b) => a.idx - b.idx);
 
-  sounds.sort((a, b) => a.updatedAt - b.updatedAt);
+  // Extract soundIds from the sorted kit.sounds
+  const soundIds = sortedSounds.map((sound) => sound.soundId);
+
+  // Retrieve sounds from SoundModel based on the sorted soundIds
+  const sounds = await SoundModel.find({ _id: { $in: soundIds } });
+  if (!sounds) throw new ExpressError('No sounds found for this kit', 404);
 
   return sounds;
 });
@@ -100,10 +108,7 @@ const updateKitSounds = handleRequest(async (req) => {
   // Update the sounds for the kit
   kit.sounds = updatedSoundIds;
 
-  await kit.save().catch((err) => {
-    console.error(err);
-    throw new ExpressError('Failed to save changes to kit', 500);
-  });
+  await kit.save();
 
   return kit.sounds;
 });
@@ -117,7 +122,7 @@ const updateKitById = handleRequest(async (req) => {
   const updatedKit = await KitModel.findByIdAndUpdate(kitId, req.body, {
     new: true,
   });
-  // Invalidate the cache for the kit using its name
+  // Invalidate the cache for the kit using its ID
   invalidateCache(kitId);
   // Update the cache with the new data
   await getFromDbAndCache(kitId, (forceUpdate = true));
