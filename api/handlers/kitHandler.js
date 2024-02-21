@@ -75,22 +75,37 @@ const getKitSounds = handleRequest(async (req) => {
   const kit = await KitModel.findById(kitId);
   if (!kit) throw new ExpressError('Kit not found', 404);
 
-  // Sort the sounds in the kit based on the idx field
-  const sortedSounds = kit.sounds.sort((a, b) => a.idx - b.idx);
+  // Sorting the sounds in the kit based on the idx field then extracting soundIds from the sorted kit.sounds
+  const soundIds = kit.sounds.sort((a, b) => a.idx - b.idx).map((sound) => sound.soundId);
 
-  // Extract soundIds from the sorted kit.sounds
-  const soundIds = sortedSounds.map((sound) => sound.soundId);
-
-  // Retrieve sounds from SoundModel based on the sorted soundIds
+  // Retrieving sounds from the SoundModel based on the sorted soundIds's order
   const sounds = await SoundModel.aggregate([
     { $match: { _id: { $in: soundIds } } },
     { $addFields: { __order: { $indexOfArray: [soundIds, '$_id'] } } },
     { $sort: { __order: 1 } },
-    { $project: { __order: 0 } },
+    { $project: { __order: 0 } }, // used to exclude the __order field from the final output.
   ]);
   if (!sounds) throw new ExpressError('No sounds found for this kit', 404);
 
   return sounds;
+});
+
+const updateKitSoundsOrder = handleRequest(async (req) => {
+  const { kitId } = req.params;
+  if (!kitId) throw new ExpressError('Kit ID not found', 404);
+
+  const kit = await KitModel.findById(kitId);
+  if (!kit) throw new ExpressError('Kit not found', 404);
+
+  const { sounds } = req.body;
+  if (!sounds || !Array.isArray(sounds)) throw new ExpressError('Invalid request body', 400);
+
+  // Update the sounds for the kit
+  kit.sounds = sounds;
+
+  await kit.save();
+
+  return kit.sounds;
 });
 
 const updateKitSounds = handleRequest(async (req) => {
